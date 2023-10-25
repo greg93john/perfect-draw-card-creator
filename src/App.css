@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+.content-wrap {
+  position: absolute;
+  /* padding-top: 4.5rem;  Navbar Height */
+  padding-bottom: 2.5rem;    /* Footer height */
+  z-index: 3;
+}
+
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;            /* Footer height */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f8f9fa;
+  background-color: #343a40;
+}

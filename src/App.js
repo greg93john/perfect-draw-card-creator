@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import MainView from "./components/MainView";
+import Footer from "./components/Footer";
 
-function App() {
+/*function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +20,15 @@ function App() {
           Learn React
         </a>
       </header>
+    </div>
+  );
+}*/
+
+function App() {
+  return (
+    <div className="page-container">
+      <MainView />
+      <Footer />
     </div>
   );
 }
