@@ -39,9 +39,10 @@
 
 .content-wrap {
   background-color: bisque;
-  padding-bottom: 2.5rem;    /* Footer height */
+  padding-bottom: 2.6rem;    /* Footer height (with a small gap) */
   /*padding-top: 4.5rem;  /* Navbar Height */
   z-index: 3;
+  min-height: 90vh;
 }
 
 .page-container {
