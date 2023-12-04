@@ -14,7 +14,11 @@ function MainView() {
               <h1>Hello world</h1>
             </div>
             <div className="card-body">
-              Filling space
+              
+              <div>
+                <p>Filling space</p>
+              </div>
+              
             </div>
             
           </div>
