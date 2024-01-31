@@ -1,23 +1,24 @@
 import React from "react";
 
 function About(props) {
+
     return(
     <div className="card-body">
         <div className="border border-dark rounded my-2">
-            <h2>Level {0}</h2>
-            <p>XP: {0}</p>
+            <h2>Level {props.charData.level}</h2>
+            <p>XP: {props.charData.xp}</p>
         </div>
 
         
 
         <div className="border border-dark rounded my-2">
-            <p>Class DC {20}</p>
+            <p><b>Class DC</b> {props.charData.classDC}</p>
         </div>
 
         
 
         <div className="border border-dark rounded my-2">
-            <p>Hero Points</p>
+            <p><b>Hero Points</b></p>
             <input type="checkbox" />
             <input type="checkbox" />
             <input type="checkbox" />
@@ -26,40 +27,40 @@ function About(props) {
         
 
         <div className="border border-dark rounded my-2">
-            <h5>STR +{0}</h5>
-            <h5>DEX +{0}</h5>
-            <h5>CON +{0}</h5>
-            <h5>INT +{0}</h5>
-            <h5>WIS +{0}</h5>
-            <h5>CHA +{0}</h5>
-            <p>Size: {"Medium"}</p>
-            <p>Speed: {35}ft.</p>
+            <h5>STR +{props.charData.str}</h5>
+            <h5>DEX +{props.charData.dex}</h5>
+            <h5>CON +{props.charData.con}</h5>
+            <h5>INT +{props.charData.int}</h5>
+            <h5>WIS +{props.charData.wis}</h5>
+            <h5>CHA +{props.charData.cha}</h5>
+            <p><b>Size</b>: {props.charData.size}</p>
+            <p><b>Speed</b>: {props.charData.speed}ft.</p>
         </div>
 
 
 
         <div className="border border-dark rounded my-2">
-            <p>Gender: {"Not set"}</p>
+            <p><b>Gender</b>: {props.charData.gender}</p>
         </div>
         
 
 
         <div className="border border-dark rounded my-2">
-            <p>Deiy: {"Not Set"}</p>
-            <p>Age: {"Not Set"}</p>
+            <p><b>Deity</b>: {props.charData.deity}</p>
+            <p><b>Age</b>: {props.charData.age}</p>
         </div>
 
 
         <div className="border border-dark rounded my-2">
-            <p>Languages: {"None selected"}</p>
+            <p><b>Languages</b>: {props.charData.languages}</p>
         </div>
 
 
 
         <div className="border border-dark rounded my-2">
-            <p>Edit Notes</p>
+            <b>Edit Notes</b>
             <hr />
-            <p>{"Notes"}</p>
+            <p>{props.charData.editNotes}</p>
         </div>
     </div>
     )

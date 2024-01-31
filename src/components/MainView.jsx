@@ -9,7 +9,7 @@ function MainView(props) {
   function ShowTabBody(name) {
     let tabBody;
     switch (name.toLowerCase()) {
-      case "about": tabBody = <About />
+      case "about": tabBody = <About charData ={props.charData}/>
         break;
 
       case "feats": tabBody = <Feats />
@@ -30,7 +30,6 @@ function MainView(props) {
       <div className="row">
         <div className="col">
 
-
           <div className="card text-center">
             <div className="card-header">
               <h1>{props.tabName}</h1>
@@ -39,7 +38,6 @@ function MainView(props) {
             {ShowTabBody(props.tabName)}
 
           </div>
-
 
         </div>
       </div>
