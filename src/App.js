@@ -12,7 +12,7 @@ function App() {
   }
 
   return (
-    <div className="page-container container-fluid px-0">
+    <div className="page-container">
       <NavBar buttonFunction={ChangeViewTo}/>
       <MainView tabName={tabName} />
       <Footer />

@@ -1,5 +1,4 @@
 import React from "react";
-import MainView from './MainView';
 
 function NavBar(props) {
     return (
