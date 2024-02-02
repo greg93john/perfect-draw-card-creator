@@ -1,4 +1,3 @@
-import React from "react";
 import About from './tab-bodies/About';
 import Feats from './tab-bodies/Feats';
 import Gear from './tab-bodies/Gear';
@@ -7,22 +6,22 @@ import Skills from './tab-bodies/Skills';
 function MainView(props) {
 
   function ShowTabBody(name) {
-    let tabBody;
+
     switch (name.toLowerCase()) {
-      case "about": tabBody = <About charData ={props.charData}/>
+      case "about": return(<About charData ={props.charData} updateCharData ={props.updateCharData} />);
         break;
 
-      case "feats": tabBody = <Feats />
+      case "feats": return(<Feats />);
         break;
 
-      case "gear": tabBody = <Gear />
+      case "gear": return(<Gear />);
         break;
 
-      case "skills": tabBody = <Skills />
+      case "skills": return(<Skills />);
         break;
+        default: return(<div></div>);
     }
 
-    return (tabBody);
   }
 
   return (

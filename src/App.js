@@ -7,7 +7,7 @@ import NavBar from "./components/NavBar";
 function App() {
   const [tabName, setTabName] = useState("About");
 
-  const [charData, setCharDta] = useState(
+  const [charData, setCharData] = useState(
     {
       level: 0,
       xp: 0,
@@ -26,16 +26,23 @@ function App() {
       languages: "Not Set",
       editNotes: "Notes"
     }
-  );
+  ); 
+  let temp = charData;
 
   function ChangeViewTo(varName) {
     setTabName(varName);
   }
 
+  function UpdateCharData (key, val) {
+    temp = charData;
+    temp[key] = val;
+    setCharData({...temp});
+  }
+
   return (
     <div className="page-container">
       <NavBar activeTabName={tabName} buttonFunction={ChangeViewTo} />
-      <MainView charData={charData} tabName={tabName} />
+      <MainView charData={charData} updateCharData={UpdateCharData} tabName={tabName} />
       <Footer />
     </div>
   );
