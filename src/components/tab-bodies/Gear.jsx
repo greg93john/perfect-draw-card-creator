@@ -1,6 +1,11 @@
 import React from "react";
 
 function Gear(props) {
+
+    function IncrementCurrencyBy(key, val) {
+        props.updateCharData("currency", { ...props.charData.currency, [key]: props.charData.currency[key] + val });
+    }
+
     return (
         <div className="card-body">
             <div className="border border-dark rounded my-2">
@@ -9,13 +14,13 @@ function Gear(props) {
                         <h5>Platinum</h5>
                         <div className="row">
                             <div className="col">
-                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "platinum": props.charData.currency.platinum - 1 }) }}>-</button>
+                                <button onClick={() => { IncrementCurrencyBy("platinum", -1) }}>-</button>
                             </div>
                             <div className="col">
                                 <p>{props.charData.currency.platinum}</p>
                             </div>
                             <div className="col">
-                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "platinum": props.charData.currency.platinum + 1 }) }}>+</button>
+                                <button onClick={() => { IncrementCurrencyBy("platinum", 1) }}>+</button>
                             </div>
                         </div>
                     </div>
@@ -23,13 +28,13 @@ function Gear(props) {
                         <h5>Gold</h5>
                         <div className="row">
                             <div className="col">
-                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "gold": props.charData.currency.gold - 1 }) }}>-</button>
+                                <button onClick={() => { IncrementCurrencyBy("gold", -1) }}>-</button>
                             </div>
                             <div className="col">
                                 <p>{props.charData.currency.gold}</p>
                             </div>
                             <div className="col">
-                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "gold": props.charData.currency.gold + 1 }) }}>+</button>
+                                <button onClick={() => { IncrementCurrencyBy("gold", 1) }}>+</button>
                             </div>
                         </div>
                     </div>
@@ -37,13 +42,13 @@ function Gear(props) {
                         <h5>Silver</h5>
                         <div className="row">
                             <div className="col">
-                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "silver": props.charData.currency.silver - 1 }) }}>-</button>
+                                <button onClick={() => { IncrementCurrencyBy("silver", -1) }}>-</button>
                             </div>
                             <div className="col">
                                 <p>{props.charData.currency.silver}</p>
                             </div>
                             <div className="col">
-                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "silver": props.charData.currency.silver + 1 }) }}>+</button>
+                                <button onClick={() => { IncrementCurrencyBy("silver", 1) }}>+</button>
                             </div>
                         </div>
                     </div>
@@ -51,13 +56,13 @@ function Gear(props) {
                         <h5>Copper</h5>
                         <div className="row">
                             <div className="col">
-                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "copper": props.charData.currency.copper - 1 }) }}>-</button>
+                                <button onClick={() => { IncrementCurrencyBy("copper", -1) }}>-</button>
                             </div>
                             <div className="col">
                                 <p>{props.charData.currency.copper}</p>
                             </div>
                             <div className="col">
-                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "copper": props.charData.currency.copper + 1 }) }}>+</button>
+                                <button onClick={() => { IncrementCurrencyBy("copper", 1) }}>+</button>
                             </div>
                         </div>
                     </div>
