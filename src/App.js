@@ -24,19 +24,26 @@ function App() {
       deity: "Not Set",
       age: "Not Set",
       languages: "Not Set",
-      editNotes: "Notes"
+      editNotes: "Notes",
+      currentBulk: 0,
+      encumbered: 0,
+      maximum: 0,
+      currency:
+      {
+        platinum: 0,
+        gold: 0,
+        silver: 0,
+        copper: 0,
+      },
     }
-  ); 
-  let temp = charData;
+  );
 
   function ChangeViewTo(varName) {
     setTabName(varName);
   }
 
-  function UpdateCharData (key, val) {
-    temp = charData;
-    temp[key] = val;
-    setCharData({...temp});
+  function UpdateCharData(key, val) {
+    setCharData({...charData, [key]:val });
   }
 
   return (

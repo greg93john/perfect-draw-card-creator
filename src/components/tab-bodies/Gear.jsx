@@ -7,19 +7,59 @@ function Gear(props) {
                 <div className="row">
                     <div className="col">
                         <h5>Platinum</h5>
-                        <p>0</p>
+                        <div className="row">
+                            <div className="col">
+                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "platinum": props.charData.currency.platinum - 1 }) }}>-</button>
+                            </div>
+                            <div className="col">
+                                <p>{props.charData.currency.platinum}</p>
+                            </div>
+                            <div className="col">
+                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "platinum": props.charData.currency.platinum + 1 }) }}>+</button>
+                            </div>
+                        </div>
                     </div>
                     <div className="col">
                         <h5>Gold</h5>
-                        <p>0</p>
+                        <div className="row">
+                            <div className="col">
+                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "gold": props.charData.currency.gold - 1 }) }}>-</button>
+                            </div>
+                            <div className="col">
+                                <p>{props.charData.currency.gold}</p>
+                            </div>
+                            <div className="col">
+                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "gold": props.charData.currency.gold + 1 }) }}>+</button>
+                            </div>
+                        </div>
                     </div>
                     <div className="col">
                         <h5>Silver</h5>
-                        <p>0</p>
+                        <div className="row">
+                            <div className="col">
+                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "silver": props.charData.currency.silver - 1 }) }}>-</button>
+                            </div>
+                            <div className="col">
+                                <p>{props.charData.currency.silver}</p>
+                            </div>
+                            <div className="col">
+                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "silver": props.charData.currency.silver + 1 }) }}>+</button>
+                            </div>
+                        </div>
                     </div>
                     <div className="col">
                         <h5>Copper</h5>
-                        <p>0</p>
+                        <div className="row">
+                            <div className="col">
+                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "copper": props.charData.currency.copper - 1 }) }}>-</button>
+                            </div>
+                            <div className="col">
+                                <p>{props.charData.currency.copper}</p>
+                            </div>
+                            <div className="col">
+                                <button onClick={() => { props.updateCharData("currency", { ...props.charData.currency, "copper": props.charData.currency.copper + 1 }) }}>+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -27,13 +67,13 @@ function Gear(props) {
             <div className="border border-dark rounded my-2">
                 <div className="row">
                     <div className="col">
-                        <p><b>Current Bulk: </b> 0 </p>
+                        <p><b>Current Bulk: </b> {props.charData.currentBulk} </p>
                     </div>
                     <div className="col">
-                        <p><b>Encumbered: </b> 0 </p>
+                        <p><b>Encumbered: </b> {props.charData.encumbered} </p>
                     </div>
                     <div className="col">
-                        <p><b>Maximum: </b> 0 </p>
+                        <p><b>Maximum: </b> {props.charData.maximum} </p>
                     </div>
                 </div>
             </div>

@@ -94,7 +94,7 @@ function About(props) {
             <div className="border border-dark rounded my-2">
                 <b>Edit Notes</b>
                 <hr />
-                <textarea name="aboutNotes" id="" cols="50" rows="10" defaultValue={props.charData.editNotes}></textarea>
+                <textarea name="aboutNotes" id="" cols="50" rows="10" defaultValue={props.charData.editNotes} onChange={(e) => { props.updateCharData("editNotes", e.target.value); }}></textarea>
             </div>
         </div>
     )

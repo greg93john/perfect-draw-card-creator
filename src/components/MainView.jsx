@@ -8,18 +8,15 @@ function MainView(props) {
   function ShowTabBody(name) {
 
     switch (name.toLowerCase()) {
-      case "about": return(<About charData ={props.charData} updateCharData ={props.updateCharData} />);
-        break;
+      case "about": return (<About charData={props.charData} updateCharData={props.updateCharData} />);
 
-      case "feats": return(<Feats />);
-        break;
+      case "feats": return (<Feats charData={props.charData} updateCharData={props.updateCharData} />);
 
-      case "gear": return(<Gear />);
-        break;
+      case "gear": return (<Gear charData={props.charData} updateCharData={props.updateCharData} />);
 
-      case "skills": return(<Skills />);
-        break;
-        default: return(<div></div>);
+      case "skills": return (<Skills charData={props.charData} updateCharData={props.updateCharData} />);
+
+      default: return (<div></div>);
     }
 
   }
