@@ -1,95 +1,48 @@
 function Deck(props) {
+    let deck = props.charData.cards;
 
     return (
         <div className="card-body">
-            <div className="border border-dark rounded">
-                <div className="warrior-cards-listing">
-                    <b>Warriors</b>
-                    <hr />
-                    <div className="row m-0">
-                        {
-                            Object.keys(props.charData.cards.warriors).map((_warriorName) => {
-                                return (
-                                    <div className="col-3">
-                                        <div className="card h-100">
-                                            <div className="card-body">
-                                                <h5 className="card-title">{_warriorName.replace(/_/g, " ")}</h5>
-                                                <p>Warrior | {props.charData.cards.warriors[_warriorName].strength + (props.charData.cards.warriors[_warriorName].isAce ? " | Ace" : "")}</p>
-                                                <hr />
-                                                {
-                                                    props.charData.cards.warriors[_warriorName].effects.map(
-                                                        (description) => {
-                                                            return (
-                                                                <p className="card-text">{description}</p>
+
+            {
+                Object.keys(deck).map((_cardType) => {
+                    const _cardTypeLabel = _cardType.charAt(0).toUpperCase() + _cardType.slice(1, -1);
+                    return (
+                        <div className={_cardType.slice(0, -1) + "-cards-listing border border-dark rounded my-3"}>
+                            <b>{_cardType}</b>
+                            <hr />
+                            <div className="row mx-0 mb-3">
+                                {
+                                    Object.keys(deck[_cardType]).map((_cardName) => {
+                                        return (
+                                            <div className="col-3">
+                                                <div className="card h-100">
+                                                    <div className="card-body">
+                                                        <h5 className="card-title">{_cardName.replace(/_/g, " ")}</h5>
+                                                        <p>{_cardTypeLabel} {(deck[_cardType][_cardName].strength) ? " | " + deck[_cardType][_cardName].strength + (deck[_cardType][_cardName].isAce ? " | Ace" : "") : ""}</p>
+                                                        <hr />
+                                                        {
+                                                            deck[_cardType][_cardName].effects.map(
+                                                                (description) => {
+                                                                    return (
+                                                                        <p className="card-text">{description}</p>
+                                                                    )
+                                                                }
                                                             )
                                                         }
-                                                    )
-                                                }
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
-                <div className="item-cards-listing">
-                    <b>Items</b>
-                    <hr />
-                    <div className="row m-0">
-                        {
-                            Object.keys(props.charData.cards.items).map((_itemName) => {
-                                return (
-                                    <div className="col-3">
-                                        <div className="card h-100">
-                                            <div className="card-body">
-                                                <h5 className="card-title">{_itemName.replace(/_/g, " ")}</h5>
-                                                <hr />
-                                                {
-                                                    props.charData.cards.items[_itemName].effects.map(
-                                                        (description) => {
-                                                            return (
-                                                                <p className="card-text">{description}</p>
-                                                            )
-                                                        }
-                                                    )
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
-                <div className="invocation-cards-listing">
-                    <b>Invocations</b>
-                    <hr />
-                    <div className="row m-0">
-                        {
-                            Object.keys(props.charData.cards.invocations).map((_invocationName) => {
-                                return (
-                                    <div className="col-3">
-                                        <div className="card h-100">
-                                            <div className="card-body">
-                                                <h5 className="card-title">{_invocationName.replace(/_/g, " ")}</h5>
-                                                <hr />
-                                                {props.charData.cards.invocations[_invocationName].effects.map(
-                                                    (description) => {
-                                                        return (
-                                                            <p className="card-text">{description}</p>)
-                                                    }
-                                                )
-                                                }
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
-            </div>
+                                        )
+                                    }
+                                    )
+                                }
+                            </div>
+                        </div>
+                    )
+                })
+            }
+
             <div className="border border-dark rounded my-2">
                 <b>Create New Card:</b>
                 <hr />

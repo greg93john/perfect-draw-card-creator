@@ -52,6 +52,7 @@ function App() {
       cards:
       {
         warriors: {
+
           BBB_Star_Soldier: {
             strength: "Normal",
             isAce: true,
@@ -96,7 +97,7 @@ function App() {
 
         items: {
           BBB_toybox: {
-            strength: "normal",
+            strength: "Normal",
             effects : 
             [
               "When this is played and at the start of each turn, create a {Weak} warrior.",
