@@ -8,6 +8,11 @@ function NavBar(props) {
                     </button>
                 </li>
                 <li className="nav-item" role="presentation">
+                    <button className={"nav-link text-light" + ((props.activeTabName.toLowerCase() === "deck") ? " active" : "")} onClick={() => props.buttonFunction("Deck")} id="contact-tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">
+                        Deck
+                    </button>
+                </li>
+                <li className="nav-item" role="presentation">
                     <button className={"nav-link text-light" + ((props.activeTabName.toLowerCase() === "skills") ? " active" : "")} onClick={() => props.buttonFunction("Skills")} id="home-tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabIndex="-1">
                         Skills
                     </button>

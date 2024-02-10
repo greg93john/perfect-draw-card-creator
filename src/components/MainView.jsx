@@ -1,4 +1,5 @@
 import About from './tab-bodies/About';
+import Deck from './tab-bodies/Deck';
 import Feats from './tab-bodies/Feats';
 import Gear from './tab-bodies/Gear';
 import Skills from './tab-bodies/Skills';
@@ -9,6 +10,8 @@ function MainView(props) {
 
     switch (name.toLowerCase()) {
       case "about": return (<About charData={props.charData} updateCharData={props.updateCharData} />);
+
+      case "deck": return (<Deck charData={props.charData} updateCharData={props.updateCharData} />);
 
       case "feats": return (<Feats charData={props.charData} updateCharData={props.updateCharData} />);
 
