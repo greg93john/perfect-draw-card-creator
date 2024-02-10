@@ -53,6 +53,10 @@ body {
   min-height: 100vh;
 }
 
+.warrior-cards-listing, .item-cards-listing, .invocation-cards-listing {
+  display: flow-root;
+}
+
 /*footer {
   position: absolute;
   bottom: 0;
