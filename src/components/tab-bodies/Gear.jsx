@@ -1,5 +1,3 @@
-import React from "react";
-
 function Gear(props) {
 
     function IncrementCurrencyBy(key, val) {

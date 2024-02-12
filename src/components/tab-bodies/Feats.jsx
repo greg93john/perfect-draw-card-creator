@@ -1,5 +1,3 @@
-import React from "react";
-
 function Feats(props) {
     return (
         <div className="card-body">
