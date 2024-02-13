@@ -16,8 +16,6 @@ function App() {
 
   const [charData, setCharData] = useState(
     {
-      level: 0,
-      xp: 0,
       classDC: 20,
       str: 0,
       dex: 0,
@@ -47,10 +45,11 @@ function App() {
 
       name: "Elena Guerrero",
       pronouns: "She/Her",
+      level: 0,
+      xp: 0,
       passion: 3,
       skill: -1,
       friendship: 1,
-      exp: 0,
       deck:
       {
         warriors: {
