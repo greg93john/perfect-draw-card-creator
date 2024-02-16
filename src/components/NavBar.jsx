@@ -17,11 +17,6 @@ function NavBar(props) {
                         Gear
                     </button>
                 </li>
-                <li className="nav-item" role="presentation" key={"skills"}>
-                    <button key={"skills-button"} className={"nav-link text-light" + ((props.activeTabName.toLowerCase() === "skills") ? " active" : "")} onClick={() => props.buttonFunction("Skills")} id="home-tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" tabIndex="-1">
-                        Skills
-                    </button>
-                </li>
             </ul>
         </div>
     );

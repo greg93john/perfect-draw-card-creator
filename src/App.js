@@ -16,20 +16,7 @@ function App() {
 
   const [charData, setCharData] = useState(
     {
-      classDC: 20,
-      str: 0,
-      dex: 0,
-      con: 0,
-      int: 0,
-      wis: 0,
-      cha: 0,
-      size: "Medium",
-      speed: 35,
-      gender: "Not Set",
-      deity: "Not Set",
-      age: "Not Set",
-      languages: "Not Set",
-      editNotes: "Notes",
+      
       currentBulk: 0,
       encumbered: 0,
       maximum: 0,
@@ -50,13 +37,14 @@ function App() {
       passion: 3,
       skill: -1,
       friendship: 1,
+      
       deck:
       {
         warriors: {
           id: 0,
           cards:
           {
-            BBB_Star_Soldier: {
+            "B.B.B. Star Soldier": {
               id: 0,
               strength: "Normal",
               isAce: true,
@@ -68,7 +56,7 @@ function App() {
                 ]
             },
 
-            BBB_Support_Copter: {
+            "B.B.B. Support Copter": {
               id: 1,
               strength: "Normal",
               isAce: false,
@@ -79,7 +67,7 @@ function App() {
                 ]
             },
 
-            BBB_Explosives_Planter: {
+            "B.B.B. Explosives Planter": {
               id: 2,
               strength: "Normal",
               isAce: false,
@@ -90,7 +78,7 @@ function App() {
                 ]
             },
 
-            BBB_Tactical_Officer: {
+            "B.B.B. Tactical Officer": {
               id: 3,
               strength: "Weak",
               isAce: false,
@@ -107,7 +95,7 @@ function App() {
           id: 1,
           cards:
           {
-            BBB_toybox: {
+            "B.B.B. toybox": {
               id: 0,
               strength: "Normal",
               effects:
@@ -123,7 +111,7 @@ function App() {
           id: 2,
           cards:
           {
-            BBB_build_instructions: {
+            "B.B.B. build instructions": {
               id: 0,
               effects:
                 [
@@ -132,7 +120,7 @@ function App() {
                 ]
             },
 
-            BBB_backup_squadron: {
+            "B.B.B. backup squadron": {
               id: 1,
               effects:
                 [

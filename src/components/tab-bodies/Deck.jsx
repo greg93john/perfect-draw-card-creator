@@ -7,16 +7,47 @@ function Deck(props) {
             name: null,
             strength: "weak",
             type: "warrior",
-            effects: [],
+            effects:
+                [
+                    {
+                        id: 0,
+                        description: ""
+                    }
+                ],
             isAce: false
         }
     );
 
+    function SubmitCreatedCard() {
+        const _typeName = createCard.type + "s";
+        createCard.id = Object.keys(_deck[_typeName].cards).length;
+        props.updateCharData("deck", { ..._deck, [_typeName]: { ..._deck[_typeName], cards: { ..._deck[_typeName].cards, [createCard.name]: createCard } } });
+        setCreateCard(
+            {
+                ...createCard,
+                name: "",
+                effects:
+                    [
+                        {
+                            id: 0,
+                            description: ""
+                        }
+                    ]
+            }
+        );
+        document.getElementById('create-card-name-input').value = "";
+    }
 
-    function handleCardCreatorChange(attribute, val) {
+
+    function HandleCardCreatorChange(attribute, val) {
+        console.log(attribute + " changed to " + val);
         setCreateCard(
             { ...createCard, [attribute]: val }
         );
+    }
+
+    function checkIfSumbitIsPossible() {
+        return (createCard.name === null || createCard.name === '');
     }
 
     return (
@@ -26,7 +57,7 @@ function Deck(props) {
                     const _cardTypeLabel = _cardType.charAt(0).toUpperCase() + _cardType.slice(1, -1);
                     return (
                         <div key={_cardType + _cardType.id} className={_cardType.slice(0, -1) + "-cards-listing border border-dark rounded my-3"}>
-                            <h3>{_cardType.charAt(0).toUpperCase() + _cardType.slice(1)}</h3>
+                            <h3>{_cardTypeLabel + "s"}</h3>
                             <hr />
                             <div className="row mx-0 mb-3">
                                 {
@@ -37,7 +68,7 @@ function Deck(props) {
                                                 <div className="card h-100">
                                                     <img className="card-img-top" src={`images/${_cardObject.strength ? _cardObject.strength + "-" : ""}${_cardTypeLabel}.png`} alt="Card image Top" />
                                                     <div className="card-body">
-                                                        <h5 className="card-title">{_cardName.replace(/_/g, " ")}</h5>
+                                                        <h5 className="card-title">{_cardName}</h5>
                                                         <p>{_cardTypeLabel} {(_cardObject.strength) ? " | " + _cardObject.strength + (_cardObject.isAce ? " | Ace" : "") : ""}</p>
                                                         <hr />
                                                         {
@@ -47,8 +78,7 @@ function Deck(props) {
                                                 </div>
                                             </div>
                                         )
-                                    }
-                                    )
+                                    })
                                 }
                             </div>
                         </div>
@@ -57,21 +87,20 @@ function Deck(props) {
             }
 
             <div className="border border-dark rounded my-2">
-                <b>Create New Card:</b>
+                <h2>Create New Card:</h2>
                 <hr />
 
-                <form>
-                    <label>
-                        <div className="card h-100">
+                <div className="row">
+                    <div className="col-4 offset-4">
+                        <div className="card">
                             <img src={`images/${(createCard.type === "warrior" || createCard.type === "item") ? createCard.strength + "-" : ""}${createCard.type}.png`} alt="Create Card Image Top" />
                             <div className="card-body">
                                 Name:
-                                <input type="text" name="name" />
-
+                                <input id="create-card-name-input" type="text" name="name" onChange={(e) => { HandleCardCreatorChange("name", e.target.value) }} />
                                 <div className="row">
-                                    <div className="col-4">
+                                    <div className="col">
                                         Type:
-                                        <select onChange={e => handleCardCreatorChange("type", e.target.value)} value={createCard.type} >
+                                        <select onChange={e => HandleCardCreatorChange("type", e.target.value)} value={createCard.type} >
                                             <option value="warrior">Warrior</option>
                                             <option value="item">Item</option>
                                             <option value="invocation">Invocation</option>
@@ -79,30 +108,41 @@ function Deck(props) {
                                             <option value="custom">Custom</option>
                                         </select>
                                     </div>
-                                    {<div className="col-4">
+                                    {<div className="col">
                                         Strength:
-                                        <select onChange={e => handleCardCreatorChange("strength", e.target.value)} value={createCard.strength} >
+                                        <select onChange={e => HandleCardCreatorChange("strength", e.target.value)} value={createCard.strength} >
                                             <option value="Weak">Weak</option>
                                             <option value="Normal">Normal</option>
                                             <option value="Strong">Strong</option>
                                         </select>
                                     </div>}
-                                    <div className="col-4">
-                                        Is Ace <br /> <input type="checkbox" value={createCard.isAce} />
+                                    <div className="col">
+                                        Ace <br /> <input type="checkbox" onChange={e => HandleCardCreatorChange("isAce", e.target.checked)} checked={createCard.isAce} />
                                     </div>
                                 </div>
-
                                 <hr />
-
                                 <div>
                                     Effects:
-                                    <textarea />
+                                    <br />
+                                    <div>
+                                        {
+                                            createCard.effects.map((effect) => {
+                                                return (
+                                                    <div key={effect.id} className="">
+                                                        <textarea name={"effect" + effect.id} id={effect.id} rows="2" onChange={(e) => { let _effects = [...createCard.effects]; _effects.find(a => a.id == effect.id).description = e.target.value; HandleCardCreatorChange("effects", _effects) }}></textarea>
+                                                        <br />
+                                                    </div>
+                                                )
+                                            }
+                                            )
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </label>
-                    <input className="btn btn-primary" type="submit" value="Submit" />
-                </form>
+                        <button type="button" className="btn btn-primary" onClick={SubmitCreatedCard} disabled={checkIfSumbitIsPossible()}>Submit</button>
+                    </div>
+                </div>
 
             </div>
         </div>
