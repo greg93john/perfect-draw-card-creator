@@ -22,20 +22,7 @@ function Deck(props) {
         const _typeName = createCard.type + "s";
         createCard.id = Object.keys(_deck[_typeName].cards).length;
         props.updateCharData("deck", { ..._deck, [_typeName]: { ..._deck[_typeName], cards: { ..._deck[_typeName].cards, [createCard.name]: createCard } } });
-        setCreateCard(
-            {
-                ...createCard,
-                name: "",
-                effects:
-                    [
-                        {
-                            id: 0,
-                            description: ""
-                        }
-                    ]
-            }
-        );
-        document.getElementById('create-card-name-input').value = "";
+        ClearCreateCardInputFields();
     }
 
 
@@ -46,8 +33,37 @@ function Deck(props) {
         );
     }
 
+    function UpdateEffect(type, inputID, val) {
+        let _effects = [...createCard.effects];
+        _effects.find(a => a.id == inputID)[type] = val;
+        HandleCardCreatorChange("effects", _effects)
+    }
+
+    function AddNewEffect() {
+        HandleCardCreatorChange("effects", [...createCard.effects, { id: createCard.effects.length, description: "" }])
+    }
+
     function checkIfSumbitIsPossible() {
         return (createCard.name === null || createCard.name === '');
+    }
+
+    function ClearCreateCardInputFields() {
+        document.getElementById('create-card-name-input').value = "";
+        [].forEach.call(document.getElementsByClassName("effect-input-field"), (el) => { el.value = ""; });
+        setCreateCard(
+            {
+                ...createCard,
+                name: "",
+                effects:
+                    [
+                        {
+                            id: 0,
+                            description: ""
+                        }
+                    ],
+                isAce: false
+            }
+        );
     }
 
     return (
@@ -72,7 +88,7 @@ function Deck(props) {
                                                         <p>{_cardTypeLabel} {(_cardObject.strength) ? " | " + _cardObject.strength + (_cardObject.isAce ? " | Ace" : "") : ""}</p>
                                                         <hr />
                                                         {
-                                                            _cardObject.effects.map(_effect => <p key={"effect" + _effect.id} className="card-text">{(_effect.title ? (<b>{_effect.title} -</b>) : "")} {_effect.description}</p>)
+                                                            _cardObject.effects.map(_effect => <p key={"effect" + _effect.id} className="card-text">{((_effect.title && _effect.title !== "") ? (<b>{_effect.title} -</b>) : "")} {_effect.description}</p>)
                                                         }
                                                     </div>
                                                 </div>
@@ -116,9 +132,14 @@ function Deck(props) {
                                             <option value="Strong">Strong</option>
                                         </select>
                                     </div>}
-                                    <div className="col">
-                                        Ace <br /> <input type="checkbox" onChange={e => HandleCardCreatorChange("isAce", e.target.checked)} checked={createCard.isAce} />
-                                    </div>
+                                    {
+                                        createCard.type === "warrior" ?
+                                            <div className="col">
+                                                Ace: <br /> <input type="checkbox" onChange={e => HandleCardCreatorChange("isAce", e.target.checked)} checked={createCard.isAce} />
+                                            </div>
+                                            :
+                                            <div className="col"></div>
+                                    }
                                 </div>
                                 <hr />
                                 <div>
@@ -129,13 +150,16 @@ function Deck(props) {
                                             createCard.effects.map((effect) => {
                                                 return (
                                                     <div key={effect.id} className="">
-                                                        <textarea name={"effect" + effect.id} id={effect.id} rows="2" onChange={(e) => { let _effects = [...createCard.effects]; _effects.find(a => a.id == effect.id).description = e.target.value; HandleCardCreatorChange("effects", _effects) }}></textarea>
+                                                        <input className="effect-input-field" type="text" name={"effectTitle" + effect.id} onChange={(e) => { UpdateEffect("title", effect.id, e.target.value) }} />
+                                                        <br />
+                                                        <textarea className="effect-input-field" name={"effectDecription"} id={"effectDescription" + effect.id} rows="2" onChange={(e) => { UpdateEffect("description", effect.id, e.target.value) }}></textarea>
                                                         <br />
                                                     </div>
                                                 )
                                             }
                                             )
                                         }
+                                        <button className="btn btn-success rounded-circle" onClick={AddNewEffect}>+</button>
                                     </div>
                                 </div>
                             </div>
