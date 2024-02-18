@@ -150,7 +150,7 @@ function Deck(props) {
                                             createCard.effects.map((effect) => {
                                                 return (
                                                     <div key={effect.id} className="">
-                                                        <input className="effect-input-field" type="text" name={"effectTitle" + effect.id} onChange={(e) => { UpdateEffect("title", effect.id, e.target.value) }} />
+                                                        <input className="effect-input-field mb-1" type="text" name={"effectTitle" + effect.id} onChange={(e) => { UpdateEffect("title", effect.id, e.target.value) }} />
                                                         <br />
                                                         <textarea className="effect-input-field" name={"effectDecription"} id={"effectDescription" + effect.id} rows="2" onChange={(e) => { UpdateEffect("description", effect.id, e.target.value) }}></textarea>
                                                         <br />
