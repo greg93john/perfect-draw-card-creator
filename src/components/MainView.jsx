@@ -1,7 +1,5 @@
 import About from './tab-bodies/About';
 import Deck from './tab-bodies/Deck';
-import Gear from './tab-bodies/Gear';
-import Skills from './tab-bodies/Skills';
 
 function MainView(props) {
 
@@ -11,10 +9,6 @@ function MainView(props) {
       case "about": return (<About charData={props.charData} updateCharData={props.updateCharData} />);
 
       case "deck": return (<Deck charData={props.charData} updateCharData={props.updateCharData} />);
-
-      case "gear": return (<Gear charData={props.charData} updateCharData={props.updateCharData} />);
-
-      case "skills": return (<Skills charData={props.charData} updateCharData={props.updateCharData} />);
 
       default: return (<div></div>);
     }

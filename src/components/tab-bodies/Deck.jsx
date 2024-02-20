@@ -14,9 +14,11 @@ function Deck(props) {
                         description: ""
                     }
                 ],
-            isAce: false
+            isAce: false,
+            customImgURL: null
         }
-    );
+    ), [prevStrength, setPrevStrength] = useState(createCard.strength);
+
 
     function SubmitCreatedCard() {
         const _typeName = createCard.type + "s";
@@ -27,9 +29,18 @@ function Deck(props) {
 
 
     function HandleCardCreatorChange(attribute, val) {
-        console.log(attribute + " changed to " + val);
+        let _temp = createCard;
+
+        if (attribute === "type" && val === "invocation") {
+            setPrevStrength(_temp.strength);
+            _temp.strength = null;
+        } else if (attribute === "type" && val !== "invocation" && _temp.strength === null) {
+            _temp.strength = prevStrength;
+        }
+
+        _temp[attribute] = val;
         setCreateCard(
-            { ...createCard, [attribute]: val }
+            { ..._temp }
         );
     }
 
@@ -82,7 +93,7 @@ function Deck(props) {
                                         return (
                                             <div key={_cardName + _cardName.id} className="col-3">
                                                 <div className="card h-100">
-                                                    <img className="card-img-top" src={`images/${_cardObject.strength ? _cardObject.strength + "-" : ""}${_cardTypeLabel}.png`} alt="Card image Top" />
+                                                    <img className="card-img-top" src={`images/${(_cardTypeLabel.toLowerCase() === "warrior" || _cardTypeLabel.toLowerCase() === "item") ? _cardObject.strength.toLowerCase() + "-" : ""}${_cardTypeLabel.toLowerCase()}.png`} alt="Card image Top" />
                                                     <div className="card-body">
                                                         <h5 className="card-title">{_cardName}</h5>
                                                         <p>{_cardTypeLabel} {(_cardObject.strength) ? " | " + _cardObject.strength + (_cardObject.isAce ? " | Ace" : "") : ""}</p>
@@ -106,10 +117,10 @@ function Deck(props) {
                 <h2>Create New Card:</h2>
                 <hr />
 
-                <div className="row">
+                <div className="row mx-0">
                     <div className="col-4 offset-4">
                         <div className="card">
-                            <img src={`images/${(createCard.type === "warrior" || createCard.type === "item") ? createCard.strength + "-" : ""}${createCard.type}.png`} alt="Create Card Image Top" />
+                            <img class="card-img-top" src={(createCard.customImgURL) ? URL.createObjectURL(createCard.customImgURL) : `images/${(createCard.type === "warrior" || createCard.type === "item") ? createCard.strength + "-" : ""}${createCard.type}.png`} alt="Create Card Image Top" />
                             <div className="card-body">
                                 Name:
                                 <input id="create-card-name-input" type="text" name="name" onChange={(e) => { HandleCardCreatorChange("name", e.target.value) }} />
@@ -120,18 +131,19 @@ function Deck(props) {
                                             <option value="warrior">Warrior</option>
                                             <option value="item">Item</option>
                                             <option value="invocation">Invocation</option>
-                                            <option value="special">Special</option>
-                                            <option value="custom">Custom</option>
                                         </select>
                                     </div>
-                                    {<div className="col">
-                                        Strength:
-                                        <select onChange={e => HandleCardCreatorChange("strength", e.target.value)} value={createCard.strength} >
-                                            <option value="Weak">Weak</option>
-                                            <option value="Normal">Normal</option>
-                                            <option value="Strong">Strong</option>
-                                        </select>
-                                    </div>}
+                                    {
+                                        (createCard.type === "warrior" || createCard.type === "item") ?
+                                            <div className="col">
+                                                Strength:
+                                                <select onChange={e => HandleCardCreatorChange("strength", e.target.value)} value={createCard.strength} >
+                                                    <option value="Weak">Weak</option>
+                                                    <option value="Normal">Normal</option>
+                                                    <option value="Strong">Strong</option>
+                                                </select>
+                                            </div> : <div className="col"></div>
+                                    }
                                     {
                                         createCard.type === "warrior" ?
                                             <div className="col">
@@ -165,6 +177,7 @@ function Deck(props) {
                             </div>
                         </div>
                         <button type="button" className="btn btn-primary" onClick={SubmitCreatedCard} disabled={checkIfSumbitIsPossible()}>Submit</button>
+                        <input type="file" name="myImage" onChange={(e) => HandleCardCreatorChange("customImgURL", e.target.files[0])} />
                     </div>
                 </div>
 

@@ -16,20 +16,6 @@ function App() {
 
   const [charData, setCharData] = useState(
     {
-      
-      currentBulk: 0,
-      encumbered: 0,
-      maximum: 0,
-      currency:
-      {
-        platinum: 0,
-        gold: 0,
-        silver: 0,
-        copper: 0,
-      },
-
-
-
       name: "Elena Guerrero",
       pronouns: "She/Her",
       level: 0,
@@ -127,22 +113,6 @@ function App() {
                   { id: 0, description: "Create four {Weak} warriors with {Teamwork}. (Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strengh totals.)" }
                 ]
             }
-          }
-        },
-
-        specials: {
-          id: 3,
-          cards:
-          {
-
-          }
-        },
-
-        customs: {
-          id: 4,
-          cards:
-          {
-
           }
         }
       }
