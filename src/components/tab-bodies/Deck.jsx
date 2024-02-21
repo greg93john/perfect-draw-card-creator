@@ -54,7 +54,7 @@ function Deck(props) {
         HandleCardCreatorChange("effects", [...createCard.effects, { id: createCard.effects.length, description: "" }])
     }
 
-    function checkIfSumbitIsPossible() {
+    function CheckIfSumbitIsPossible() {
         return (createCard.name === null || createCard.name === '');
     }
 
@@ -72,7 +72,8 @@ function Deck(props) {
                             description: ""
                         }
                     ],
-                isAce: false
+                isAce: false,
+                customImgURL: null
             }
         );
     }
@@ -82,21 +83,31 @@ function Deck(props) {
             {
                 Object.keys(_deck).map((_cardType) => {
                     const _cardTypeLabel = _cardType.charAt(0).toUpperCase() + _cardType.slice(1, -1);
+
                     return (
                         <div key={_cardType + _cardType.id} className={_cardType.slice(0, -1) + "-cards-listing border border-dark rounded my-3"}>
+
                             <h3>{_cardTypeLabel + "s"}</h3>
+
                             <hr />
-                            <div className="row mx-0 mb-3">
+
+                            <div className="row row-cols-4 gy-3 mx-0 mb-3">
+
                                 {
                                     Object.keys(_deck[_cardType].cards).map((_cardName) => {
                                         const _cardObject = _deck[_cardType].cards[_cardName];
+
                                         return (
-                                            <div key={_cardName + _cardName.id} className="col-3">
+                                            <div key={_cardName + _cardName.id} className="col">
+
                                                 <div className="card h-100">
-                                                    <img className="card-img-top" src={`images/${(_cardTypeLabel.toLowerCase() === "warrior" || _cardTypeLabel.toLowerCase() === "item") ? _cardObject.strength.toLowerCase() + "-" : ""}${_cardTypeLabel.toLowerCase()}.png`} alt="Card image Top" />
+                                                    <img className="card-img-top" src={(_cardObject.customImgURL) ? URL.createObjectURL(_cardObject.customImgURL) : `images/${(_cardTypeLabel.toLowerCase() === "warrior" || _cardTypeLabel.toLowerCase() === "item") ? _cardObject.strength.toLowerCase() + "-" : ""}${_cardTypeLabel.toLowerCase()}.png`} alt="Card image Top" />
+
                                                     <div className="card-body">
                                                         <h5 className="card-title">{_cardName}</h5>
+
                                                         <p>{_cardTypeLabel} {(_cardObject.strength) ? " | " + _cardObject.strength + (_cardObject.isAce ? " | Ace" : "") : ""}</p>
+
                                                         <hr />
                                                         {
                                                             _cardObject.effects.map(_effect => <p key={"effect" + _effect.id} className="card-text">{((_effect.title && _effect.title !== "") ? (<b>{_effect.title} -</b>) : "")} {_effect.description}</p>)
@@ -107,6 +118,7 @@ function Deck(props) {
                                         )
                                     })
                                 }
+
                             </div>
                         </div>
                     )
@@ -120,7 +132,16 @@ function Deck(props) {
                 <div className="row mx-0">
                     <div className="col-4 offset-4">
                         <div className="card">
-                            <img class="card-img-top" src={(createCard.customImgURL) ? URL.createObjectURL(createCard.customImgURL) : `images/${(createCard.type === "warrior" || createCard.type === "item") ? createCard.strength + "-" : ""}${createCard.type}.png`} alt="Create Card Image Top" />
+                            <div className="card-header">
+                                <ul className="nav nav-tabs card-header-tabs">
+                                    <label htmlFor="custom-image-upload">
+                                        <li className="nav-item">
+                                            <b className="btn btn-success active" style={{ cursor: "pointer" }}>Upload Image</b>
+                                        </li>
+                                    </label>
+                                </ul>
+                            </div>
+                            <img className="card-img-top" src={(createCard.customImgURL) ? URL.createObjectURL(createCard.customImgURL) : `images/${(createCard.type === "warrior" || createCard.type === "item") ? createCard.strength + "-" : ""}${createCard.type}.png`} alt="Create Card Image Top" />
                             <div className="card-body">
                                 Name:
                                 <input id="create-card-name-input" type="text" name="name" onChange={(e) => { HandleCardCreatorChange("name", e.target.value) }} />
@@ -176,8 +197,8 @@ function Deck(props) {
                                 </div>
                             </div>
                         </div>
-                        <button type="button" className="btn btn-primary" onClick={SubmitCreatedCard} disabled={checkIfSumbitIsPossible()}>Submit</button>
-                        <input type="file" name="myImage" onChange={(e) => HandleCardCreatorChange("customImgURL", e.target.files[0])} />
+                        <button type="button" className="btn btn-primary" onClick={SubmitCreatedCard} disabled={CheckIfSumbitIsPossible()}>Submit</button>
+                        <input hidden={true} type="file" id="custom-image-upload" name="custom-image" onChange={(e) => HandleCardCreatorChange("customImgURL", e.target.files[0])} />
                     </div>
                 </div>
 
