@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react';
+import DisplayCard from '../tab-elements/DisplayCard';
+import DisplayTypeCategory from '../tab-elements/DisplayTypeCategory';
 
 function Deck(props) {
     const _deck = props.charData.deck;
@@ -81,46 +83,10 @@ function Deck(props) {
     return (
         <div className="card-body">
             {
-                Object.keys(_deck).map((_cardType) => {
-                    const _cardTypeLabel = _cardType.charAt(0).toUpperCase() + _cardType.slice(1, -1);
+                Object.keys(_deck).map((_cardsType) => {
 
                     return (
-                        <div key={_cardType + _cardType.id} className={_cardType.slice(0, -1) + "-cards-listing border border-dark rounded my-3"}>
-
-                            <h3>{_cardTypeLabel + "s"}</h3>
-
-                            <hr />
-
-                            <div className="row row-cols-4 gy-3 mx-0 mb-3">
-
-                                {
-                                    Object.keys(_deck[_cardType].cards).map((_cardName) => {
-                                        const _cardObject = _deck[_cardType].cards[_cardName];
-
-                                        return (
-                                            <div key={_cardName + _cardName.id} className="col">
-
-                                                <div className="card h-100">
-                                                    <img className="card-img-top" src={(_cardObject.customImgURL) ? URL.createObjectURL(_cardObject.customImgURL) : `images/${(_cardTypeLabel.toLowerCase() === "warrior" || _cardTypeLabel.toLowerCase() === "item") ? _cardObject.strength.toLowerCase() + "-" : ""}${_cardTypeLabel.toLowerCase()}.png`} alt="Card image Top" />
-
-                                                    <div className="card-body">
-                                                        <h5 className="card-title">{_cardName}</h5>
-
-                                                        <p>{_cardTypeLabel} {(_cardObject.strength) ? " | " + _cardObject.strength + (_cardObject.isAce ? " | Ace" : "") : ""}</p>
-
-                                                        <hr />
-                                                        {
-                                                            _cardObject.effects.map(_effect => <p key={"effect" + _effect.id} className="card-text">{((_effect.title && _effect.title !== "") ? (<b>{_effect.title} -</b>) : "")} {_effect.description}</p>)
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                }
-
-                            </div>
-                        </div>
+                        <DisplayTypeCategory cards={_deck[_cardsType].cards} cardsType={_cardsType} key={_cardsType + _deck[_cardsType].id} />
                     )
                 })
             }
