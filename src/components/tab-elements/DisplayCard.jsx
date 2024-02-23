@@ -1,7 +1,6 @@
 function DisplayCard(props) {
     const _card = props.cardObject;
-    console.log(_card.effects);
-    
+
     return (
         <div className="card h-100">
             <div className="">
@@ -19,13 +18,15 @@ function DisplayCard(props) {
             <div className="card-body">
                 <h5 className="card-title">{_card.name}</h5>
 
-                <p>{_card.type.charAt(0).toUpperCase() + _card.type.slice(1)} {(_card.strength) ? " | " + _card.strength + (_card.isAce ? " | Ace" : "") : ""}</p>
+                <p>{_card.type.charAt(0).toUpperCase() + _card.type.slice(1)} {(_card.strength) ? " | " + _card.strength : ""} {(_card.isAce ? " | Ace" : "")}</p>
 
                 <hr />
-                    
+
                 {
-                    _card.effects.map(_effect => <p key={"effect" + _effect.id} className="card-text">{((_effect.title && _effect.title !== "") ? <b>{_effect.title} - </b> : "")} {_effect.description}</p>)
+                    _card.effects.map(_effect => <p key={"effect" + _effect.id} className="card-text text-start effect-description">{((_effect.title && _effect.title !== "") ? <b>{_effect.title}: <br /></b> : "")} {_effect.description}</p>)
                 }
+
+                <p className="card-text text-start flavour-text">{_card.flavour}</p>
             </div>
         </div>
     )

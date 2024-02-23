@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -41,11 +42,22 @@ body {
   background-color: bisque;
 }
 
+.effect-description, .flavour-text {
+  white-space: pre-line;
+}
+
 .content-wrap {
-  padding-bottom: 2.6rem;    /* Footer height (with a small gap) */
+  padding-bottom: 2.6rem;
+  /* Footer height (with a small gap) */
   /*padding-top: 4.5rem;  /* Navbar Height */
   z-index: 3;
   min-height: 90vh;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
 }
 
 .page-container {
@@ -53,7 +65,9 @@ body {
   min-height: 100vh;
 }
 
-.warrior-cards-listing, .item-cards-listing, .invocation-cards-listing {
+.warrior-cards-listing,
+.item-cards-listing,
+.invocation-cards-listing {
   display: flow-root;
 }
 
@@ -67,7 +81,8 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 2.5rem;            /* Footer height *//*
+  height: 2.5rem;            /* Footer height */
+/*
   
   display: flex;
   align-items: center;
