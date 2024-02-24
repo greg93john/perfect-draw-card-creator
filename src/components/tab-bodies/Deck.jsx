@@ -49,8 +49,7 @@ function Deck(props) {
     }
 
     function ClearCreateCardInputFields() {
-        document.getElementById('name').value = "";
-        document.getElementById('effect').value = "";
+        document.getElementById('create-card-form').reset();
 
         setCreateCard(
             {

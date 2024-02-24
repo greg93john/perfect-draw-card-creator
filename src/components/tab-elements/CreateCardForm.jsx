@@ -27,7 +27,7 @@ function CreateCardForm(props) {
     const handelSubmit = (e) => { e.preventDefault(); props.submitCreatedCard(); };
 
     return (
-        <form className="text-start" onSubmit={handelSubmit}>
+        <form id="create-card-form" className="text-start" onSubmit={handelSubmit}>
             Name:
             <input className="border-0 border-bottom border-dark w-100" id="name" type="text" maxLength={200} value={props.createCard.name} onChange={(e) => { UpdateCreateCardValue("name", e.target.value) }} />
 
