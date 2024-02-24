@@ -49,8 +49,9 @@ function Deck(props) {
     }
 
     function ClearCreateCardInputFields() {
-        document.getElementById('create-card-name-input').value = "";
-        [].forEach.call(document.getElementsByClassName("effect-input-field"), (el) => { el.value = ""; });
+        document.getElementById('name').value = "";
+        document.getElementById('effect').value = "";
+
         setCreateCard(
             {
                 ...createCard,
@@ -78,7 +79,7 @@ function Deck(props) {
 
                 <div className="row roq-cols-2 mx-0">
                     <div className='col'>
-                        <CreateCardForm createCard={createCard} setCreateCard={setCreateCard} />
+                        <CreateCardForm submitCreatedCard={SubmitCreatedCard} createCard={createCard} setCreateCard={setCreateCard} />
                     </div>
                     <div className='col'>
                         <DisplayCard cardObject={createCard}/>

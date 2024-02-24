@@ -1,4 +1,3 @@
-import About from './tab-bodies/About';
 import Deck from './tab-bodies/Deck';
 
 function MainView(props) {
@@ -6,7 +5,6 @@ function MainView(props) {
   function ShowTabBody(name) {
 
     switch (name.toLowerCase()) {
-      case "about": return (<About charData={props.charData} updateCharData={props.updateCharData} />);
 
       case "deck": return (<Deck charData={props.charData} updateCharData={props.updateCharData} />);
 

@@ -20,7 +20,11 @@ function CreateCardForm(props) {
         );
     }
 
-    const handelSubmit = (e) => { e.preventDefault(); };
+    function CheckIfSubmitable() {
+        return (props.createCard.name === "");
+    }
+
+    const handelSubmit = (e) => { e.preventDefault(); props.submitCreatedCard(); };
 
     return (
         <form className="text-start" onSubmit={handelSubmit}>
@@ -75,15 +79,15 @@ function CreateCardForm(props) {
 
             <br />
 
-            Flavor:
+            {/* Flavor:
 
             <br />
 
             <textarea className="w-100" id="flavour" rows="2" maxLength={2000} onChange={e => UpdateCreateCardValue("flavour", e.target.value)}></textarea>
 
-            <br />
+            <br /> */}
 
-            <button type="submit" className="btn btn-primary my-3">Save</button>
+            <button disabled={CheckIfSubmitable()} type="submit" className="btn btn-primary my-3">Save</button>
         </form>
     )
 }
