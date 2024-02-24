@@ -37,7 +37,7 @@ function DisplayCard(props) {
     return (
         <div className="trading-card border border-5 mx-auto">
             <div className="trading-card-name-field">
-                <h5>{_card.name}</h5>
+                <h5 className='my-auto'>{_card.name}</h5>
             </div>
 
             <div className="trading-card-image-field">
