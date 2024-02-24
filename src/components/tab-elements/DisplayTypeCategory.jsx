@@ -10,7 +10,7 @@ function DisplayTypeCategory(props) {
 
             <hr />
 
-            <div className="row row-cols-4 gy-3 mx-0 mb-3">
+            <div className="row gy-3 mx-0 mb-3">
 
                 {
                     Object.keys(_cards).map((_cardName) => {

@@ -23,7 +23,7 @@ function App() {
       passion: 3,
       skill: -1,
       friendship: 1,
-      
+
       deck:
       {
         warriors: {
@@ -32,47 +32,30 @@ function App() {
           {
             "B.B.B. Star Soldier": {
               id: 0,
-              strength: "Normal",
+              strength: "Strong",
               isAce: true,
-              effects:
-                [
-                  { id: 0, title:"Teamwork", description: "Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strength totals." },
-                  { id: 1, title:"Piercer (1)", description: "When this card defeats another card in battle, it deals damage to that cards controller equal to the piercer value." },
-                  { id: 2, title:"Followup", description: "You can play an additional card after this one." }
-                ]
+              effect:
+                "{Teamwork} - Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strength totals.\n\n" +
+                "{Piercer (1)} - When this card defeats another card in battle, it deals damage to that cards controller equal to the piercer value.\n\n" +
+                "{Followup} - You can play an additional card after this one."
             },
 
             "B.B.B. Support Copter": {
               id: 1,
               strength: "Normal",
               isAce: false,
-              effects:
-                [
-                  { id: 0, title: "Teamwork", description: "Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strength totals." },
-                  { id: 1, title: null, description: "All other warriors you control are {Strenghened} - (When a card is strenghened, {Weak} cards become {Normal}, {Normal} cards become {Strong}, {Strong} cards gain {Overwhelm}.)" }
-                ]
+              effect:
+                "{Teamwork} - Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strength totals.\n\n" +
+                "All other warriors you control are {Strenghened} - (When a card is strenghened, {Weak} cards become {Normal}, {Normal} cards become {Strong}, {Strong} cards gain {Overwhelm}.)"
             },
 
             "B.B.B. Explosives Planter": {
               id: 2,
-              strength: "Normal",
-              isAce: false,
-              effects:
-                [
-                  { id: 0, title: "Teamwork", description: "Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strength totals." },
-                  { id: 1, title: null, description: "Target opponent {Fumbles}. (Describe an action you don't want the opponent to take, You can counter that action for free until the start of your next turn.)" }
-                ]
-            },
-
-            "B.B.B. Tactical Officer": {
-              id: 3,
               strength: "Weak",
               isAce: false,
-              effects:
-                [
-                  { id: 0, title: "Teamwork", description: "Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strength totals." },
-                  { id: 1, title: "", description: "You may play an additional staple or cast an additional invocation the turn you play this." }
-                ]
+              effect:
+                "{Teamwork} - Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strength totals.\n\n" +
+                "Target opponent {Fumbles}. (Describe an action you don't want the opponent to take, You can counter that action for free until the start of your next turn.)"
             }
           }
         },
@@ -84,11 +67,9 @@ function App() {
             "B.B.B. toybox": {
               id: 0,
               strength: "Normal",
-              effects:
-                [
-                  { id: 0, description: "When this is played and at the start of each turn, create a {Weak} warrior." },
-                  { id: 1, description: "All warriors have {Teamwork}. (Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strengh totals.)" }
-                ]
+              effect:
+                "When this is played and at the start of each turn, create a {Weak} warrior.\n\n" +
+                "All warriors have {Teamwork}. (Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strengh totals.)",
             }
           }
         },
@@ -99,19 +80,14 @@ function App() {
           {
             "B.B.B. build instructions": {
               id: 0,
-              effects:
-                [
-                  { id: 0, description: "Draw 3 cards" },
-                  { id: 1, description: "You can only use this card if it's the last card in your hand." }
-                ]
+              effect:
+                "Draw 3 cards\n\n" +
+                "You can only use this card if it's the last card in your hand.",
             },
 
             "B.B.B. backup squadron": {
               id: 1,
-              effects:
-                [
-                  { id: 0, description: "Create four {Weak} warriors with {Teamwork}. (Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strengh totals.)" }
-                ]
+              effect:"Create four {Weak} warriors with {Teamwork}. (Cards with teamwork can pair up with each other and up to one card without teamwork to combine their strengh totals.)"
             }
           }
         }

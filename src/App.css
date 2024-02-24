@@ -39,11 +39,22 @@
 }
 
 body {
-  background-color: bisque;
+  background-color: rgb(85, 85, 85);
 }
 
-.effect-description, .flavour-text {
-  white-space: pre-line;
+[class ^="trading-card-"] {
+  margin: auto;
+  max-width: 85%;
+  display: flow-root;
+  font-family: 'Urbanist-VariableFont';
+}
+
+.card-ace-field {
+  font-family: 'Urbanist-Italic-VariableFont';
+}
+
+.card-strength-field {
+  font-family: 'Urbanist-Bold';
 }
 
 .content-wrap {
@@ -54,10 +65,12 @@ body {
   min-height: 90vh;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
+.trading-card-effect-field>* {
+  white-space: pre-line;
+}
+
+.trading-card-name-field {
+  height: 1rem;
 }
 
 .page-container {
@@ -65,16 +78,47 @@ select:focus {
   min-height: 100vh;
 }
 
-.warrior-cards-listing,
-.item-cards-listing,
-.invocation-cards-listing {
-  display: flow-root;
+.trading-card {
+  width: 20.313rem;
+  height: 28.718rem;
+  background-image: url('./images/card-background.png');
+  background-size: cover;
 }
 
-.card-img-top {
-  width: 100%;
-  height: 25vw;
-  object-fit: cover;
+.trading-card-effect-field,
+.trading-card-image-field {
+  height: 40%;
+  margin: .5rem auto;
+}
+
+.card-ace-field,
+.card-strength-field,
+.card-type-field,
+.trading-card-effect-field,
+.trading-card-image-field,
+.trading-card-name-field {
+  background-color: rgb(255, 255, 255);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+@font-face {
+  font-family: "Urbanist-VariableFont";
+  src: url('./fonts/Urbanist-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: "Urbanist-Bold";
+  src: url('./fonts/static/Urbanist-Bold.ttf');
+}
+
+@font-face {
+  font-family: "Urbanist-Italic-VariableFont";
+  src: url('./fonts/Urbanist-Italic-VariableFont_wght.ttf');
 }
 
 /*footer {

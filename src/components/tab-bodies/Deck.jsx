@@ -48,20 +48,6 @@ function Deck(props) {
         );
     }
 
-    function UpdateEffect(type, inputID, val) {
-        let _effects = [...createCard.effects];
-        _effects.find(a => a.id == inputID)[type] = val;
-        HandleCardCreatorChange("effects", _effects)
-    }
-
-    function AddNewEffect() {
-        HandleCardCreatorChange("effects", [...createCard.effects, { id: createCard.effects.length, description: "" }])
-    }
-
-    function CheckIfSumbitIsPossible() {
-        return (createCard.name === null || createCard.name === '');
-    }
-
     function ClearCreateCardInputFields() {
         document.getElementById('create-card-name-input').value = "";
         [].forEach.call(document.getElementsByClassName("effect-input-field"), (el) => { el.value = ""; });
@@ -69,13 +55,7 @@ function Deck(props) {
             {
                 ...createCard,
                 name: "",
-                effects:
-                    [
-                        {
-                            id: 0,
-                            description: ""
-                        }
-                    ],
+                effect: "",
                 isAce: false,
                 customImgURL: null
             }
@@ -86,7 +66,6 @@ function Deck(props) {
         <div className="card-body">
             {
                 Object.keys(_deck).map((_cardsType) => {
-
                     return (
                         <DisplayTypeCategory cards={_deck[_cardsType].cards} cardsType={_cardsType} key={_cardsType + _deck[_cardsType].id} />
                     )

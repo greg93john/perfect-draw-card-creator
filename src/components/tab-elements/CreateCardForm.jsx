@@ -20,14 +20,10 @@ function CreateCardForm(props) {
         );
     }
 
-    function UpdateEffect(type, inputID, val) {
-        let _effects = [...props.createCard.effects];
-        _effects.find(a => a.id == inputID)[type] = val;
-        UpdateCreateCardValue("effects", _effects)
-    }
+    const handelSubmit = (e) => { e.preventDefault(); };
 
     return (
-        <form className="text-start" action="">
+        <form className="text-start" onSubmit={handelSubmit}>
             Name:
             <input className="border-0 border-bottom border-dark w-100" id="name" type="text" maxLength={200} value={props.createCard.name} onChange={(e) => { UpdateCreateCardValue("name", e.target.value) }} />
 
@@ -75,7 +71,7 @@ function CreateCardForm(props) {
 
             <br />
 
-            <textarea className="w-100" id="effect" rows="5" maxLength={2000} onChange={(e) => { UpdateEffect("description", props.createCard.effects[0].id, e.target.value) }}></textarea>
+            <textarea className="w-100" id="effect" rows="5" maxLength={2000} onChange={(e) => { UpdateCreateCardValue("effect", e.target.value) }}></textarea>
 
             <br />
 
@@ -87,7 +83,7 @@ function CreateCardForm(props) {
 
             <br />
 
-            <button type="submit" className="btn btn-primary">Save</button>
+            <button type="submit" className="btn btn-primary my-3">Save</button>
         </form>
     )
 }
