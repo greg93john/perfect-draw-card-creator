@@ -81,7 +81,7 @@ function Deck(props) {
                         <CreateCardForm submitCreatedCard={SubmitCreatedCard} createCard={createCard} setCreateCard={setCreateCard} />
                     </div>
                     <div className='col'>
-                        <DisplayCard cardObject={createCard}/>
+                        <DisplayCard isCreateCard={true} cardObject={createCard} />
                     </div>
                 </div>
 
