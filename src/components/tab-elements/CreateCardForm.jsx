@@ -66,7 +66,7 @@ function CreateCardForm(props) {
 
             <br />
 
-            Upload Image:
+            Upload Image (16:9 aspect ratio)
             <br />
             <input id="upload-image-input" type="file" onChange={(e) => UpdateCreateCardValue("customImgURL", e.target.files[0])} />
 
