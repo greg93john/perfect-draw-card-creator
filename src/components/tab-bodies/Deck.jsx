@@ -12,16 +12,10 @@ function Deck(props) {
             strength: "weak",
             isAce: false,
             customImgURL: null,
-            effects:
-                [
-                    {
-                        id: 0,
-                        description: ""
-                    }
-                ],
-            flavor: ""
+            effect: "",
+            id: "createCard"
         }
-    ), [prevStrength, setPrevStrength] = useState(createCard.strength);
+    );
 
 
     function SubmitCreatedCard() {
@@ -29,23 +23,6 @@ function Deck(props) {
         createCard.id = Object.keys(_deck[_typeName].cards).length;
         props.updateCharData("deck", { ..._deck, [_typeName]: { ..._deck[_typeName], cards: { ..._deck[_typeName].cards, [createCard.name]: createCard } } });
         ClearCreateCardInputFields();
-    }
-
-
-    function HandleCardCreatorChange(attribute, val) {
-        let _temp = createCard;
-
-        if (attribute === "type" && val === "invocation") {
-            setPrevStrength(_temp.strength);
-            _temp.strength = "";
-        } else if (attribute === "type" && val !== "invocation" && _temp.strength === "") {
-            _temp.strength = prevStrength;
-        }
-
-        _temp[attribute] = val;
-        setCreateCard(
-            { ..._temp }
-        );
     }
 
     function ClearCreateCardInputFields() {
@@ -78,10 +55,10 @@ function Deck(props) {
 
                 <div className="row roq-cols-2 mx-0">
                     <div className='col'>
-                        <CreateCardForm submitCreatedCard={SubmitCreatedCard} createCard={createCard} setCreateCard={setCreateCard} />
+                        <CreateCardForm  createCard={createCard} submitCreatedCard={SubmitCreatedCard} setCreateCard={setCreateCard} />
                     </div>
                     <div className='col'>
-                        <DisplayCard isCreateCard={true} cardObject={createCard} />
+                        <DisplayCard cardObject={createCard} />
                     </div>
                 </div>
 

@@ -2,49 +2,13 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 body {
   background-color: rgb(85, 85, 85);
 }
 
 [class ^="trading-card-"] {
   margin: auto;
-  max-width: 85%;
+  max-width: 90%;
   display: flow-root;
   font-family: 'Urbanist-VariableFont';
 }
@@ -70,12 +34,9 @@ body {
   min-height: 90vh;
 }
 
-.trading-card-effect-field>* {
-  white-space: pre-line;
-}
-
 .trading-card-name-field {
-  height: 1.5rem;
+  font-family: 'Urbanist-Bold';
+  height: 2rem;
 }
 
 .page-container {
@@ -90,21 +51,21 @@ body {
   background-size: cover;
 }
 
-.trading-card-image-field {
-  margin: 0 auto;
+.trading-card-effect-field {
+  height: 37%;
 }
 
-.trading-card-effect-field,
 .trading-card-image-field {
+  background-color: darkgrey;
   height: 40%;
-  margin: .5rem auto;
 }
+
+
 
 .card-ace-field,
 .card-strength-field,
 .card-type-field,
 .trading-card-effect-field,
-.trading-card-image-field,
 .trading-card-name-field {
   background-color: rgb(255, 255, 255);
 }
@@ -113,6 +74,10 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
+}
+
+.trading-card-effect-field>* {
+  white-space: pre-wrap;
 }
 
 @font-face {
@@ -128,6 +93,11 @@ select:focus {
 @font-face {
   font-family: "Urbanist-Italic-VariableFont";
   src: url('./fonts/Urbanist-Italic-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: "Urbanist-Black";
+  src: url('./fonts/static/Urbanist-Black.ttf');
 }
 
 /*footer {

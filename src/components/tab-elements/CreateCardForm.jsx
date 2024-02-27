@@ -18,6 +18,7 @@ function CreateCardForm(props) {
         props.setCreateCard(
             { ..._temp }
         );
+
     }
 
     function CheckIfSubmitable() {
@@ -67,7 +68,7 @@ function CreateCardForm(props) {
 
             Upload Image:
             <br />
-            <input id="upload-image" type="file" onChange={(e) => UpdateCreateCardValue("customImgURL", e.target.files[0])} />
+            <input id="upload-image-input" type="file" onChange={(e) => UpdateCreateCardValue("customImgURL", e.target.files[0])} />
 
             <br />
 
@@ -75,17 +76,9 @@ function CreateCardForm(props) {
 
             <br />
 
-            <textarea className="w-100" id="effect" rows="5" maxLength={2000} onChange={(e) => { UpdateCreateCardValue("effect", e.target.value) }}></textarea>
+            <textarea className="w-100" id="effect-input" rows="5" maxLength={2000} value={props.createCard.effect} onChange={(e) => { UpdateCreateCardValue("effect", e.target.value) }}></textarea>
 
             <br />
-
-            {/* Flavor:
-
-            <br />
-
-            <textarea className="w-100" id="flavour" rows="2" maxLength={2000} onChange={e => UpdateCreateCardValue("flavour", e.target.value)}></textarea>
-
-            <br /> */}
 
             <button disabled={CheckIfSubmitable()} type="submit" className="btn btn-primary my-3">Save</button>
         </form>
