@@ -20,7 +20,7 @@ function DisplayCard(props) {
                 {_card.name}
             </div>
 
-            <div className="trading-card-image-field mx-auto mb-3">
+            <div className="trading-card-image-field ratio ratio-16x9 mx-auto mb-3">
                 <img
                     className="card-image h-100"
                     src={
@@ -33,7 +33,7 @@ function DisplayCard(props) {
                 />
             </div>
 
-            <div ref={effectTextContainerRef} className="trading-card-effect-field text-start px-2 mb-2">
+            <div ref={effectTextContainerRef} className="trading-card-effect-field text-start p-2 mb-2">
                 {_card.effect}
             </div>
 
