@@ -13,10 +13,6 @@ body {
   font-family: 'Urbanist-VariableFont';
 }
 
-.card-ace-field {
-  font-family: 'Urbanist-Italic-VariableFont';
-}
-
 .card-image {
   max-width: 100%;
   object-fit: contain;
@@ -52,7 +48,8 @@ body {
 }
 
 .trading-card-effect-field {
-  height: 40%;
+  line-height: 1.1;
+  height: 41.75%;
 }
 
 .trading-card-image-field {

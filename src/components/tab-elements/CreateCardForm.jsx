@@ -80,7 +80,7 @@ function CreateCardForm(props) {
 
             <br />
 
-            <button disabled={CheckIfSubmitable()} type="submit" className="btn btn-primary my-3">Save</button>
+            <button disabled={CheckIfSubmitable()} type="submit" className="btn btn-primary my-3">Create</button>
         </form>
     )
 }

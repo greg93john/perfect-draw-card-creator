@@ -1,5 +1,5 @@
 import textFit from '../../libraries/textFit.min.js';
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 function DisplayCard(props) {
     const _card = props.cardObject;
@@ -10,9 +10,17 @@ function DisplayCard(props) {
         if (effectTextContainerRef) {
             textFit([effectTextContainerRef.current], { minFontSize: 4, maxFontSize: 16 });
         } if (nameTextContainerRef) {
-            textFit([nameTextContainerRef.current], { minFontSize: 4, maxFontSize: 24 })
+            textFit([nameTextContainerRef.current], { minFontSize: 4, maxFontSize: 24 });
         }
-    }, [props.cardObject])
+    }, [props.cardObject]);
+
+    useLayoutEffect(() => {
+        if (effectTextContainerRef) {
+            textFit([effectTextContainerRef.current], { minFontSize: 4, maxFontSize: 16 });
+        } if (nameTextContainerRef) {
+            textFit([nameTextContainerRef.current], { minFontSize: 4, maxFontSize: 24 });
+        }
+    }, [props.cardObject]);
 
     return (
         <div className="trading-card border border-5 mx-auto">
@@ -20,7 +28,7 @@ function DisplayCard(props) {
                 {_card.name}
             </div>
 
-            <div className="trading-card-image-field ratio ratio-16x9 mx-auto mb-3">
+            <div className="trading-card-image-field ratio ratio-16x9 mx-auto mb-2">
                 <img
                     className="card-image h-100"
                     src={
@@ -48,7 +56,7 @@ function DisplayCard(props) {
                         _card.isAce ?
                             <div className={`col p${_card.strength ? 'x' : 's'}-1`}>
                                 <div className="card-ace-field">
-                                    Ace
+                                    {"{Ace}"}
                                 </div>
                             </div>
                             :
