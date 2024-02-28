@@ -23,9 +23,15 @@ function DisplayTypeCategory(props) {
                         const _cardObject = { ..._cards[_cardName], name: _cardName, type: _cardsType.slice(0, -1) };
 
                         return (
-                            <div key={_cardName + _cardName.id} className="col">
-                                <DisplayCard cardObject={_cardObject} />
-                                <button className="btn btn-danger mt-2" onClick={() => { HandleDeleteCall(_cardObject) }}>Delete</button>
+                            <div key={_cardName + _cardObject.id} className="col d-flex">
+                                <div className="dropdown-center mx-auto">
+                                    <div className="dropdown-toggle" href="" role="button" id={_cardName + _cardObject.type + _cardObject.id} data-bs-toggle="dropdown" aria-expanded="false">
+                                        <DisplayCard cardObject={_cardObject} />
+                                    </div>
+                                    <ul className="dropdown-menu text-center" data-bs-theme="red">
+                                        <li><button className="btn btn-extra dropdown-item" type="button" onClick={() => { HandleDeleteCall(_cardObject) }}> Delete</button></li>
+                                    </ul>
+                                </div>
                             </div>
                         )
                     })

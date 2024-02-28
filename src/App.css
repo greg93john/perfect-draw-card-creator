@@ -13,6 +13,30 @@ body {
   font-family: 'Urbanist-VariableFont';
 }
 
+[data-bs-theme="red"] {
+  --bs-body-color: var(--bs-white);
+  --bs-body-color-rgb: #{to-rgb($white)};
+  --bs-body-bg: var(--bs-red);
+  --bs-body-bg-rgb: #{to-rgb($red)};
+  --bs-tertiary-bg: #{$red-600};
+
+  .dropdown-menu {
+    --bs-dropdown-bg: #{mix($red-500, $red-600)};
+    --bs-dropdown-link-active-bg: #{$red-700};
+  }
+
+  .btn-extra {
+    --bs-btn-bg: #{mix($gray-600, $red-400, .5)};
+    --bs-btn-border-color: #{rgba($white, .25)};
+    --bs-btn-hover-bg: #{darken(mix($gray-600, $red-400, .5), 5%)};
+    --bs-btn-hover-border-color: #{rgba($white, .25)};
+    --bs-btn-active-bg: #{darken(mix($gray-600, $red-400, .5), 10%)};
+    --bs-btn-active-border-color: #{rgba($white, .5)};
+    --bs-btn-focus-border-color: #{rgba($white, .5)};
+    --bs-btn-focus-box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .2);
+  }
+}
+
 .card-image {
   max-width: 100%;
   object-fit: contain;
@@ -55,8 +79,6 @@ body {
 .trading-card-image-field {
   background-color: darkgrey;
 }
-
-
 
 .card-ace-field,
 .card-strength-field,

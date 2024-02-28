@@ -35,7 +35,6 @@ function Deck(props) {
 
         let i = 0;
         Object.keys(_deck[_card.type + 's'].cards).map((_cardName) => { _deck[_card.type + 's'].cards[_cardName].id = i; i++; });
-        console.log(_deck);
         props.updateCharData("deck", { ..._deck });
     }
 
