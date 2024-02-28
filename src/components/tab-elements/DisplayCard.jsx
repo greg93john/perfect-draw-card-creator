@@ -23,22 +23,19 @@ function DisplayCard(props) {
     }, [props.cardObject]);
 
     return (
-        <div className="trading-card border border-5">
+        <div className={`${props.isCreateCard ? "mx-auto create-" : ""}trading-card border border-5`}>
             <div ref={nameTextContainerRef} className="trading-card-name-field text-start my-2">
                 {_card.name}
             </div>
 
             <div className="trading-card-image-field ratio ratio-16x9 mx-auto mb-2">
-                <img
-                    className="card-image h-100"
-                    src={
-                        _card.customImgURL ?
-                            URL.createObjectURL(_card.customImgURL)
-                            :
-                            `images/${(_card.type === "warrior" || _card.type === "item") ? _card.strength.toLowerCase() + "-" : ""}${_card.type}.png`
-                    }
-                    alt="trading card art"
-                />
+                <div style={
+                    {
+                        backgroundImage: `url(${_card.customImgURL ? URL.createObjectURL(_card.customImgURL) : `images/${(_card.type === "warrior" || _card.type === "item") ? _card.strength.toLowerCase() + "-" : ""}${_card.type}.png`})`,
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "contain",
+                    }}></div>
             </div>
 
             <div ref={effectTextContainerRef} className="trading-card-effect-field text-start p-2 mb-2">

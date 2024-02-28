@@ -10,7 +10,7 @@ function DisplayTypeCategory(props) {
     }
 
     return (
-        <div className={_cardsType.slice(0, -1) + "-cards-listing border border-dark rounded my-3"}>
+        <div className={_cardsType.slice(0, -1) + "-cards-listing border border-dark rounded my-5"}>
 
             <h3>{_cardsType.charAt(0).toUpperCase() + _cardsType.slice(1)}</h3>
 

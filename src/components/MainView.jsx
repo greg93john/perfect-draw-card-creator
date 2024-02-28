@@ -6,7 +6,7 @@ function MainView(props) {
 
     switch (name.toLowerCase()) {
 
-      case "deck": return (<Deck charData={props.charData} updateCharData={props.updateCharData} />);
+      case "deck": return (<Deck deckData={props.deckData} updateDeckData={props.updateDeckData} />);
 
       default: return (<div></div>);
     }
@@ -19,9 +19,6 @@ function MainView(props) {
         <div className="col">
 
           <div className="card text-center">
-            <div className="card-header">
-              <h1>{props.tabName}</h1>
-            </div>
 
             {ShowTabBody(props.tabName)}
 

@@ -37,11 +37,6 @@ body {
   }
 }
 
-.card-image {
-  max-width: 100%;
-  object-fit: contain;
-}
-
 .card-strength-field {
   font-family: 'Urbanist-Bold';
 }
@@ -64,7 +59,8 @@ body {
   min-height: 100vh;
 }
 
-.trading-card {
+.trading-card,
+.create-trading-card {
   width: 20.313rem;
   height: 28.718rem;
   background-image: url('./images/card-background.png');
@@ -74,6 +70,10 @@ body {
 .trading-card-effect-field {
   line-height: 1.1;
   height: 41.75%;
+}
+
+.trading-card-details {
+  text-align: center;
 }
 
 .trading-card-image-field {
