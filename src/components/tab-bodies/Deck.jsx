@@ -58,7 +58,7 @@ function Deck(props) {
         const tradingCardElementsHTML = document.getElementsByClassName("trading-card");
 
         const deckRowContainer = document.createElement('div');
-        deckRowContainer.classList.add('row', 'row-cols-3', 'pt-5');
+        deckRowContainer.classList.add('row', 'row-cols-3');
 
         let cardWidth, cardHeight;
 
@@ -81,7 +81,7 @@ function Deck(props) {
 
 
         html2canvas(html, { allowTaint: true, useCORS: true, width: containerWidth}).then((canvas) => {
-            doc.addImage(canvas.toDataURL("image/png"), 'PNG', ((canvas.width/2) - (containerWidth/2)), ((canvas.height/2) - (containerHeight/2)), canvas.width / 3, canvas.height / 3);
+            doc.addImage(canvas.toDataURL("image/png"), 'PNG', ((canvas.width/2) - (containerWidth/2)), canvas.height/24, canvas.width / 3, canvas.height / 3);
             doc.save("document.pdf");
         });
 
