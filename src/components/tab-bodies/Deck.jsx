@@ -56,6 +56,7 @@ function Deck(props) {
 
     function GeneratePDF() {
         const tradingCardElementsHTML = document.getElementsByClassName("trading-card");
+        const doc = new jsPDF("p", "px", "a4");
 
         const deckRowContainer = document.createElement('div');
         deckRowContainer.classList.add('row', 'row-cols-3');
@@ -72,8 +73,6 @@ function Deck(props) {
             deckRowContainer.appendChild(columnContainer.cloneNode(true));
         }
         document.body.appendChild(deckRowContainer);
-
-        const doc = new jsPDF("p", "px", "a4");
 
         const html = deckRowContainer;
         const containerWidth = html.offsetWidth;

@@ -23,7 +23,7 @@ function DisplayCard(props) {
     }, [props.cardObject]);
 
     return (
-        <div className={`${props.isCreateCard ? "mx-auto create-" : ""}trading-card border border-5`}>
+        <div className={`${props.isCreateCard ? "mx-auto create-" : ""}trading-card border border-secondary border-5`}>
             <div ref={nameTextContainerRef} className="trading-card-name-field text-start my-2">
                 {_card.name}
             </div>
