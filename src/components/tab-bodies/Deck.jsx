@@ -54,39 +54,6 @@ function Deck(props) {
         );
     }
 
-    function GeneratePDF() {
-        const tradingCardElementsHTML = document.getElementsByClassName("trading-card");
-        const doc = new jsPDF("p", "px", "a4");
-
-        const deckRowContainer = document.createElement('div');
-        deckRowContainer.classList.add('row', 'row-cols-3');
-
-        let cardWidth, cardHeight;
-
-        for (let i = 0; i < tradingCardElementsHTML.length; i++) {
-            const card = tradingCardElementsHTML[i];
-            cardWidth = card.offsetwidth; cardHeight = card.offsetHeight;
-            const columnContainer = document.createElement('div');
-            columnContainer.classList.add('col', 'mb-5');
-            columnContainer.appendChild(card.cloneNode(true));
-            columnContainer.lastChild.classList.add('mx-auto');
-            deckRowContainer.appendChild(columnContainer.cloneNode(true));
-        }
-        document.body.appendChild(deckRowContainer);
-
-        const html = deckRowContainer;
-        const containerWidth = html.offsetWidth;
-        const containerHeight = html.offsetHeight;
-
-
-        html2canvas(html, { allowTaint: true, useCORS: true, width: containerWidth}).then((canvas) => {
-            doc.addImage(canvas.toDataURL("image/png"), 'PNG', ((canvas.width/2) - (containerWidth/2)), canvas.height/24, canvas.width / 3, canvas.height / 3);
-            doc.save("document.pdf");
-        });
-
-        document.body.removeChild(deckRowContainer);
-    }
-
     return (
         <div className="card-body">
             <div className="border border-dark rounded my-2">
@@ -110,7 +77,6 @@ function Deck(props) {
                     )
                 })
             }
-            <button className='btn btn-danger mt-4 w-100' onClick={() => GeneratePDF()}>Export to PDF</button>
         </div>
     );
 }

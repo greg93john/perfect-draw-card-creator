@@ -49,22 +49,18 @@ body {
   min-height: 90vh;
 }
 
-.trading-card-name-field {
-  font-family: 'Urbanist-Bold';
-  height: 2rem;
-}
-
 .page-container {
   position: relative;
   min-height: 100vh;
 }
 
-.trading-card,
-.create-trading-card {
-  width: 20.313rem;
-  height: 28.718rem;
-  background-image: url('./images/card-background.png');
-  background-size: cover;
+.pdf-cutout-border {
+  border-style: dashed;
+}
+
+.pdf-preview-container {
+  width: 86.7rem;
+  height: 60rem;
 }
 
 .trading-card-effect-field {
@@ -78,6 +74,19 @@ body {
 
 .trading-card-image-field {
   background-color: darkgrey;
+}
+
+.trading-card-name-field {
+  font-family: 'Urbanist-Bold';
+  height: 2rem;
+}
+
+.trading-card,
+.create-trading-card {
+  width: 20.313rem;
+  height: 28.718rem;
+  background-image: url('./images/card-background.png');
+  background-size: cover;
 }
 
 .card-ace-field,
@@ -96,6 +105,22 @@ select:focus {
 
 .trading-card-effect-field>* {
   white-space: pre-wrap;
+}
+
+#pdf-cutout-1,
+#pdf-cutout-2,
+#pdf-cutout-3,
+#pdf-cutout-5,
+#pdf-cutout-6,
+#pdf-cutout-7 {
+  border-left: 0;
+}
+
+#pdf-cutout-4,
+#pdf-cutout-5,
+#pdf-cutout-6,
+#pdf-cutout-7 {
+  border-top: 0;
 }
 
 @font-face {

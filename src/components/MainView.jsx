@@ -1,4 +1,5 @@
 import Deck from './tab-bodies/Deck';
+import PreviewPDF from './tab-bodies/PreviewPDF';
 
 function MainView(props) {
 
@@ -7,6 +8,8 @@ function MainView(props) {
     switch (name.toLowerCase()) {
 
       case "deck": return (<Deck deckData={props.deckData} updateDeckData={props.updateDeckData} />);
+
+      case "previewpdf": return (<PreviewPDF deckData={props.deckData} />);
 
       default: return (<div></div>);
     }
