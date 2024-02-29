@@ -54,13 +54,10 @@ body {
   min-height: 100vh;
 }
 
-.pdf-cutout-border {
+.hide-cutout > [id ^="pdf-cutout-"] {
+  border: 0;
+} .pdf-cutout-border {
   border-style: dashed;
-}
-
-.pdf-preview-container {
-  width: 86.7rem;
-  height: 60rem;
 }
 
 .trading-card-effect-field {

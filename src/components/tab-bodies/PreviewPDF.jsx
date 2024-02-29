@@ -8,7 +8,12 @@ function PreviewPDF(props) {
     let i = 0;
 
     function GeneratePDF() {
-        const deckContainer = document.getElementById('pdf-container');
+        const deckContainer = document.getElementById('pdf-container').cloneNode(true);
+        document.body.appendChild(deckContainer);
+        deckContainer.style.width = '86.7rem';
+        deckContainer.style.height = '60rem';
+        deckContainer.classList.remove('hide-cutout');
+
         const htmlWidth = deckContainer.offsetWidth, htmlHeight = deckContainer.offsetHeight;
 
         html2canvas(deckContainer, { allowTaint: true, useCORS: true, width: htmlWidth, height: htmlHeight + 3 }).then((canvas) => {
@@ -26,12 +31,13 @@ function PreviewPDF(props) {
 
             doc.save('document.pdf');
         });
+        deckContainer.remove();
     }
 
     return (
-        <div className="card-body main-container">
+        <div className="card-body">
 
-            <div id='pdf-container' className="pdf-preview-container d-flex flex-wrap">
+            <div id='pdf-container' className="pdf-preview-container d-flex flex-wrap hide-cutout">
                 {
                     Object.keys(_deck).map((_cardTypes) => {
                         const _cards = _deck[_cardTypes].cards;

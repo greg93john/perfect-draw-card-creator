@@ -10,7 +10,7 @@ function NavBar(props) {
 
                 <li className="nav-item" role="presentation" key={"previewpdf"}>
                     <button key={"previewpdf-button"} className={"nav-link text-light" + ((props.activeTabName.toLowerCase() === "previewpdf") ? " active" : "")} onClick={() => props.buttonFunction("PreviewPDF")} id="contact-tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">
-                        PreviewPDF
+                        Export
                     </button>
                 </li>
             </ul>
