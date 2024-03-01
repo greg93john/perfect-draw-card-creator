@@ -84,6 +84,7 @@ body {
   height: 28.718rem;
   background-image: url('./images/card-background.png');
   background-size: cover;
+  border: 0.625rem solid;
 }
 
 .card-ace-field,

@@ -1,29 +1,29 @@
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import DisplayCard from "../tab-elements/DisplayCard";
+import { useRef } from 'react';
 
 
 function PreviewPDF(props) {
     const _deck = props.deckData;
-    let i = 0;
+    let numOfCards = 0;
 
     function GeneratePDF() {
         const deckContainer = document.getElementById('pdf-container').cloneNode(true);
         document.body.appendChild(deckContainer);
         deckContainer.style.width = '86.7rem';
-        deckContainer.style.height = '60rem';
         deckContainer.classList.remove('hide-cutout');
 
         const htmlWidth = deckContainer.offsetWidth, htmlHeight = deckContainer.offsetHeight;
 
-        html2canvas(deckContainer, { allowTaint: true, useCORS: true, width: htmlWidth, height: htmlHeight + 3 }).then((canvas) => {
+        html2canvas(deckContainer, { allowTaint: true, useCORS: true, width: htmlWidth + 1, height: htmlHeight + 1 }).then((canvas) => {
             const doc = new jsPDF("p", "px", "a4");
 
             const pdfPageWidth = doc.internal.pageSize.getWidth(), pdfPageHeight = doc.internal.pageSize.getHeight();
 
-            const imgResizeRatio = Math.min(pdfPageWidth / htmlWidth, pdfPageHeight / htmlHeight);
+            const imgResizeRatioWidth = 1.20918984280532, imgResizeRatioHeight = 0.5988023952095808;
 
-            const imgWidth = htmlWidth * imgResizeRatio, imgHeight = htmlHeight * imgResizeRatio;
+            const imgWidth = pdfPageWidth * imgResizeRatioWidth, imgHeight = pdfPageHeight * imgResizeRatioHeight;
 
             const htmlImgOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), htmlImgOffsetY = (pdfPageHeight / 2) - (imgWidth * 1.25);
 
@@ -37,7 +37,7 @@ function PreviewPDF(props) {
     return (
         <div className="card-body">
 
-            <div id='pdf-container' className="pdf-preview-container d-flex flex-wrap hide-cutout">
+            <div id='pdf-container' className="d-flex flex-wrap hide-cutout">
                 {
                     Object.keys(_deck).map((_cardTypes) => {
                         const _cards = _deck[_cardTypes].cards;
@@ -45,10 +45,8 @@ function PreviewPDF(props) {
                             Object.keys(_cards).map((_cardName) => {
                                 const _cardObject = { ..._cards[_cardName], name: _cardName, type: _cardTypes.slice(0, -1) };
                                 return (
-                                    <div key={_cardName} id={`pdf-cutout-${i++}`} className="d-inline-block pdf-cutout-border">
-                                        <div className="border border-dark border-5 m-1">
-                                            <DisplayCard cardObject={_cardObject} />
-                                        </div>
+                                    <div key={_cardName} id={`pdf-cutout-${numOfCards++}`} className="pdf-cutout-border">
+                                        <DisplayCard cardObject={_cardObject} />
                                     </div>
                                 )
                             })
