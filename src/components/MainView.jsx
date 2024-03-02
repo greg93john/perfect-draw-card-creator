@@ -18,7 +18,7 @@ function MainView(props) {
 
   return (
     <div className="content-wrap container px-0">
-      <div className="card text-center">
+      <div className="card text-center mt-3">
 
         {ShowTabBody(props.tabName)}
 
