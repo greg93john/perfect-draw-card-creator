@@ -22,13 +22,15 @@ function Deck(props) {
 
 
     function SubmitCreatedCard() {
-        if (!_deck[createCard.type + 's'].cards.hasOwnProperty(createCard.name)) {
+        if (_deck[createCard.type + 's'].cards.hasOwnProperty(createCard.name)) {
+            alert(`The ${createCard.type} card "${createCard.name}" already exists.`);
+        } else if (Object.keys(_deck.warriors.cards).length + Object.keys(_deck.items.cards).length + Object.keys(_deck.invocations.cards).length >= 8) {
+            alert("Cannot have more than 8 cards at a time, please delete a card first.");
+        } else {
             const _typeName = createCard.type + "s";
             createCard.id = Object.keys(_deck[_typeName].cards).length;
             props.updateDeckData([_typeName], { ..._deck[_typeName], cards: { ..._deck[_typeName].cards, [createCard.name]: createCard } });
             ClearCreateCardInputFields();
-        } else {
-            alert(`The ${createCard.type} card "${createCard.name}" already exists.`);
         }
     }
 

@@ -8,9 +8,9 @@ function NavBar(props) {
                     </button>
                 </li>
 
-                <li className="nav-item" role="presentation" key={"previewpdf"}>
-                    <button key={"previewpdf-button"} className={"nav-link text-light" + ((props.activeTabName.toLowerCase() === "previewpdf") ? " active" : "")} onClick={() => props.buttonFunction("PreviewPDF")} id="contact-tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">
-                        Export
+                <li className="nav-item" role="presentation" key={"exports"}>
+                    <button key={"exports-button"} className={"nav-link text-light" + ((props.activeTabName.toLowerCase() === "exports") ? " active" : "")} onClick={() => props.buttonFunction("Exports")} id="contact-tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">
+                        Exports
                     </button>
                 </li>
             </ul>

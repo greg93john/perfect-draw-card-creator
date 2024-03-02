@@ -1,5 +1,5 @@
 import Deck from './tab-bodies/Deck';
-import PreviewPDF from './tab-bodies/PreviewPDF';
+import Exports from './tab-bodies/Exports';
 
 function MainView(props) {
 
@@ -9,7 +9,7 @@ function MainView(props) {
 
       case "deck": return (<Deck deckData={props.deckData} updateDeckData={props.updateDeckData} />);
 
-      case "previewpdf": return (<PreviewPDF deckData={props.deckData} />);
+      case "exports": return (<Exports deck={props.deckData} />);
 
       default: return (<div></div>);
     }
@@ -17,17 +17,11 @@ function MainView(props) {
   }
 
   return (
-    <div className="content-wrap container">
-      <div className="row">
-        <div className="col">
+    <div className="content-wrap container px-0">
+      <div className="card text-center">
 
-          <div className="card text-center">
+        {ShowTabBody(props.tabName)}
 
-            {ShowTabBody(props.tabName)}
-
-          </div>
-
-        </div>
       </div>
     </div>
   );

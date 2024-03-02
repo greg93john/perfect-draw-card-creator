@@ -54,9 +54,7 @@ body {
   min-height: 100vh;
 }
 
-.hide-cutout > [id ^="pdf-cutout-"] {
-  border: 0;
-} .pdf-cutout-border {
+.pdf-cutout-border {
   border-style: dashed;
 }
 
