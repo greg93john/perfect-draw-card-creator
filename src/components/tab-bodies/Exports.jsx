@@ -45,48 +45,45 @@ function Exports(props) {
         backCoverContainerToPDF.style.width = '86.7rem';
         document.body.appendChild(backCoverContainerToPDF);
 
-        numOfCards = 0;
+        let numOfBackCards = 0;
+        const backArray = ['card1', 'card2', 'card3', 'card4', 'card5', 'card6', 'card7', 'card8']
         backCoverContainerToPDF.innerHTML = renderToStaticMarkup(
-            Object.keys(_deck).map((_cardTypes) => {
-                const _cards = _deck[_cardTypes].cards;
+            backArray.map((backName) => {
                 return (
-                    Object.keys(_cards).map((_cardName) => {
-                        return (
-                            <div key={_cardName + "-back"} id={`pdf-cutout-${numOfCards++}`} className="pdf-cutout-border">
+                    <div key={backName + "-back"} id={`pdf-cutout-${numOfBackCards++}`} className="pdf-cutout-border">
 
-                            </div>
-                        )
-                    })
+                    </div>
                 )
             })
         );
         const hiddenCardBack = document.getElementById('hidden-container').querySelector('#hidden-card-back').cloneNode(true);
         hiddenCardBack.classList.remove('d-none');
-        for (let y = 0; y < numOfCards; y++) {
+        for (let y = 0; y < numOfBackCards; y++) {
             backCoverContainerToPDF.querySelector(`#pdf-cutout-${y}`).appendChild(hiddenCardBack.cloneNode(true));
         }
         hiddenCardBack.remove();
         /* End of Card Back Cover HTML Collection */
 
-        const htmlWidth = htmlContainerToPDF.offsetWidth, htmlHeight = htmlContainerToPDF.offsetHeight;
+        const htmlWidthFront = htmlContainerToPDF.offsetWidth;
+        const htmlWidthBack = backCoverContainerToPDF.offsetWidth, htmlHeight = backCoverContainerToPDF.offsetHeight;
 
         const doc = new jsPDF("p", "px", "a4");
 
-        html2canvas(htmlContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidth + 1, height: htmlHeight + 1 }).then((canvas) => {
+        html2canvas(htmlContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidthFront + 1, height: htmlHeight + 1 }).then((canvas) => {
             const pdfPageWidth = doc.internal.pageSize.getWidth(), pdfPageHeight = doc.internal.pageSize.getHeight();
-            const imgResizeRatioWidth = 1.20918984280532, imgResizeRatioHeight = (numOfCards < 5) ? 0.2994011976047904 : 0.5988023952095808;
+            const imgResizeRatioWidth = 1.20918984280532, imgResizeRatioHeight = 0.5988023952095808;
             const imgWidth = pdfPageWidth * imgResizeRatioWidth, imgHeight = pdfPageHeight * imgResizeRatioHeight;
-            const htmlImgOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), htmlImgOffsetY = (pdfPageHeight / 2) - (imgWidth * ((numOfCards < 5) ? .85 : 1.20));
+            const htmlImgOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), htmlImgOffsetY = (pdfPageHeight / 2) - (imgWidth * 1.20);
 
             doc.addImage({ imageData: canvas.toDataURL("image/png"), format: 'PNG', x: htmlImgOffsetX, y: htmlImgOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
         });
-        html2canvas(backCoverContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidth + 1, height: htmlHeight + 1 }).then((canvas) => {
+        html2canvas(backCoverContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidthBack + 1, height: htmlHeight + 1 }).then((canvas) => {
             doc.addPage({ format: 'a4', orientation: 'p' });
 
             const pdfPageWidth = doc.internal.pageSize.getWidth(), pdfPageHeight = doc.internal.pageSize.getHeight();
-            const imgResizeRatioWidth = 1.20918984280532, imgResizeRatioHeight = (numOfCards < 5) ? 0.2994011976047904 : 0.5988023952095808;
+            const imgResizeRatioWidth = 1.20918984280532, imgResizeRatioHeight = 0.5988023952095808;
             const imgWidth = pdfPageWidth * imgResizeRatioWidth, imgHeight = pdfPageHeight * imgResizeRatioHeight;
-            const htmlImgOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), htmlImgOffsetY = (pdfPageHeight / 2) - (imgWidth * ((numOfCards < 5) ? .85 : 1.20));
+            const htmlImgOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), htmlImgOffsetY = (pdfPageHeight / 2) - (imgWidth * 1.20);
 
             doc.addImage({ imageData: canvas.toDataURL("image/png"), format: 'PNG', x: htmlImgOffsetX, y: htmlImgOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
 

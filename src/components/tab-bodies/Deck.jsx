@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import DisplayCard from '../tab-elements/DisplayCard';
 import DisplayTypeCategory from '../tab-elements/DisplayTypeCategory';
