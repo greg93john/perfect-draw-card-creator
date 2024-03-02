@@ -36,19 +36,17 @@ function Exports(props) {
         for (let x = 0; x < numOfCards; x++) {
             const card = cardElements[x].cloneNode(true);
             htmlContainerToPDF.querySelector(`#pdf-cutout-${x}`).appendChild(card);
-            console.log("success!");
         }
 
         const htmlWidth = htmlContainerToPDF.offsetWidth, htmlHeight = htmlContainerToPDF.offsetHeight;
-
 
         html2canvas(htmlContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidth + 1, height: htmlHeight + 1 }).then((canvas) => {
             const doc = new jsPDF("p", "px", "a4");
 
             const pdfPageWidth = doc.internal.pageSize.getWidth(), pdfPageHeight = doc.internal.pageSize.getHeight();
-            const imgResizeRatioWidth = 1.20918984280532, imgResizeRatioHeight = 0.5988023952095808;
+            const imgResizeRatioWidth = 1.20918984280532, imgResizeRatioHeight = (numOfCards < 5) ? 0.2994011976047904 : 0.5988023952095808;
             const imgWidth = pdfPageWidth * imgResizeRatioWidth, imgHeight = pdfPageHeight * imgResizeRatioHeight;
-            const htmlImgOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), htmlImgOffsetY = (pdfPageHeight / 2) - (imgWidth * 1.25);
+            const htmlImgOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), htmlImgOffsetY = (pdfPageHeight / 2) - (imgWidth * ((numOfCards < 5) ? .85 : 1.20));
 
             doc.addImage({ imageData: canvas.toDataURL("image/png"), format: 'PNG', x: htmlImgOffsetX, y: htmlImgOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
             doc.save('document.pdf');
