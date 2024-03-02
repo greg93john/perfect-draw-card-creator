@@ -41,6 +41,14 @@ body {
   font-family: 'Urbanist-Bold';
 }
 
+.card-back {
+  width: 20.313rem;
+  height: 28.718rem;
+  background-image: url('./images/back-card-image.png');
+  background-size: cover;
+  border: 0.625rem solid;
+}
+
 .content-wrap {
   padding-bottom: 2.6rem;
   /* Footer height (with a small gap) */
