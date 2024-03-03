@@ -42,7 +42,7 @@ function DisplayTypeCategory(props) {
                                         <DisplayCard cardObject={_cardObject} />
                                     </div>
                                     <ul className="dropdown-menu text-center">
-                                        <li><button className="btn btn-extra dropdown-item" type="button" onClick={() => { HandleDownloadCall(_cardName + _cardObject.type + _cardObject.id, _cardName) }}> Download (PNG)</button></li>
+                                        <li><button className="btn btn-extra dropdown-item" type="button" onClick={() => { HandleDownloadCall(_cardName + _cardObject.type + _cardObject.id, _cardName) }}> Download (.png)</button></li>
                                         <li><hr class="dropdown-divider" /></li>
                                         <li><button className="btn btn-extra dropdown-item" type="button" onClick={() => { HandleDeleteCall(_cardObject) }}> Delete</button></li>
                                     </ul>
