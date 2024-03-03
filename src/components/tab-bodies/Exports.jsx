@@ -46,7 +46,7 @@ function Exports(props) {
         document.body.appendChild(backCoverContainerToPDF);
 
         let numOfBackCards = 0;
-        const backArray = ['card1', 'card2', 'card3', 'card4', 'card5', 'card6', 'card7', 'card8']
+        const backArray = ['card1', 'card2', 'card3', 'card4', 'card5', 'card6', 'card7', 'card8'];
         backCoverContainerToPDF.innerHTML = renderToStaticMarkup(
             backArray.map((backName) => {
                 return (
@@ -93,52 +93,7 @@ function Exports(props) {
         htmlContainerToPDF.remove();
         backCoverContainerToPDF.remove();
     }
-
-    function GeneratePNG() {
-        let numOfCards = 0;
-
-        /* Generate Created Trading Cards (Front) HTML Collection */
-        const htmlContainerToPDF = document.createElement('div');
-        htmlContainerToPDF.setAttribute('id', 'png-container');
-        htmlContainerToPDF.classList.add('d-flex', 'flex-wrap');
-        htmlContainerToPDF.style.width = '86.7rem';
-        document.body.appendChild(htmlContainerToPDF);
-        htmlContainerToPDF.innerHTML = renderToStaticMarkup(
-            Object.keys(_deck).map((_cardTypes) => {
-                const _cards = _deck[_cardTypes].cards;
-                return (
-                    Object.keys(_cards).map((_cardName) => {
-                        return (
-                            <div key={_cardName} id={`png-cutout-${numOfCards++}`} className="png-cutout-border m-1">
-
-                            </div>
-                        )
-                    })
-                )
-            })
-        );
-
-        const cardElements = document.getElementsByClassName('trading-card');
-
-        for (let x = 0; x < numOfCards; x++) {
-            const card = cardElements[x].cloneNode(true);
-            htmlContainerToPDF.querySelector(`#png-cutout-${x}`).appendChild(card);
-        }
-        /* End of Generating Created Trading Cards (Front) HTML Collection */
-
-        const htmlWidth = ((cardElements[0].offsetWidth + (4 * numOfCards)) * Math.min(numOfCards, 4));
-        const htmlHeight = ((cardElements[0].offsetHeight + (4 * (numOfCards > 5 ? 2 : 1))) * (numOfCards > 5 ? 2 : 1));
-
-        html2canvas(htmlContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidth + 5, height: htmlHeight + 5, backgroundColor: null }).then((canvas) => {
-            var downloadLink = document.createElement('a');
-            downloadLink.href = canvas.toDataURL('image/png');
-            downloadLink.download = 'html_image.png';
-            downloadLink.click(); // Trigger the download
-            downloadLink.remove();
-        });
-        htmlContainerToPDF.remove();
-    }
-
+    
     return (
         <div className="">
 
@@ -163,11 +118,6 @@ function Exports(props) {
                 }
             </div>
 
-            <button
-                disabled={Object.keys(_deck.warriors.cards).length + Object.keys(_deck.items.cards).length + Object.keys(_deck.invocations.cards).length === 0}
-                className='btn btn-primary w-100 mb-3'
-                onClick={() => GeneratePNG()}>Export to PNG
-            </button>
             <button
                 disabled={Object.keys(_deck.warriors.cards).length + Object.keys(_deck.items.cards).length + Object.keys(_deck.invocations.cards).length === 0}
                 className='btn btn-danger w-100'

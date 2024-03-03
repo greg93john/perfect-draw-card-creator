@@ -1,3 +1,4 @@
+import html2canvas from "html2canvas";
 import DisplayCard from "./DisplayCard";
 
 function DisplayTypeCategory(props) {
@@ -7,6 +8,18 @@ function DisplayTypeCategory(props) {
         if (props.deleteExistingCardMethod && confirm(`Do you wish to delete the ${card.type} card "${card.name}" ?`)) {
             props.deleteExistingCardMethod(card);
         }
+    }
+
+    function HandleDownloadCall(cardContainerId, cardName) {
+        const cardElementHTML = document.getElementById(cardContainerId).querySelector('.trading-card');
+        const htmlWidth = cardElementHTML.offsetWidth, htmlHeight = cardElementHTML.offsetHeight;
+        html2canvas(cardElementHTML, { allowTaint: true, useCORS: true, width: htmlWidth + 4, height: htmlHeight + 4, backgroundColor: null }).then((canvas) => {
+            var downloadLink = document.createElement('a');
+            downloadLink.href = canvas.toDataURL('image/png');
+            downloadLink.download = cardName + '.png';
+            downloadLink.click(); // Trigger the download
+            downloadLink.remove();
+        });
     }
 
     return (
@@ -28,7 +41,9 @@ function DisplayTypeCategory(props) {
                                     <div className="dropdown-toggle" href="" role="button" id={_cardName + _cardObject.type + _cardObject.id} data-bs-toggle="dropdown" aria-expanded="false">
                                         <DisplayCard cardObject={_cardObject} />
                                     </div>
-                                    <ul className="dropdown-menu text-center" data-bs-theme="red">
+                                    <ul className="dropdown-menu text-center">
+                                        <li><button className="btn btn-extra dropdown-item" type="button" onClick={() => { HandleDownloadCall(_cardName + _cardObject.type + _cardObject.id, _cardName) }}> Download (PNG)</button></li>
+                                        <li><hr class="dropdown-divider" /></li>
                                         <li><button className="btn btn-extra dropdown-item" type="button" onClick={() => { HandleDeleteCall(_cardObject) }}> Delete</button></li>
                                     </ul>
                                 </div>
