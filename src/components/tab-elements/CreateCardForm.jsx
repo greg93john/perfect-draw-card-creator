@@ -3,6 +3,10 @@ import { useState } from "react"
 function CreateCardForm(props) {
     const [prevStrength, setPrevStrength] = useState(props.createCard.strength);
 
+    function CheckIfSubmitable() {
+        return (props.createCard.name === "");
+    }
+
     function UpdateCreateCardValue(attribute, val) {
         let _temp = props.createCard;
 
@@ -19,10 +23,6 @@ function CreateCardForm(props) {
             { ..._temp }
         );
 
-    }
-
-    function CheckIfSubmitable() {
-        return (props.createCard.name === "");
     }
 
     const handelSubmit = (e) => { e.preventDefault(); props.submitCreatedCard(); };
@@ -68,7 +68,7 @@ function CreateCardForm(props) {
 
             Upload Image (16:9 aspect ratio)
             <br />
-            <input id="upload-image-input" type="file" onChange={(e) => UpdateCreateCardValue("customImgURL", e.target.files[0])} />
+            <input id="upload-image-input" type="file" onChange={(e) => UpdateCreateCardValue("customImg", e.target.files[0])} />
 
             <br />
 

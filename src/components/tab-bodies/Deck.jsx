@@ -12,12 +12,33 @@ function Deck(props) {
             type: "warrior",
             strength: "weak",
             isAce: false,
-            customImgURL: null,
+            customImg: null,
             effect: "",
             id: "createCard"
         }
     );
 
+    function ClearCreateCardInputFields() {
+        document.getElementById('create-card-form').reset();
+
+        setCreateCard(
+            {
+                ...createCard,
+                name: "",
+                effect: "",
+                isAce: false,
+                customImg: null
+            }
+        );
+    }
+
+    function DeleteExistingCard(_card) {
+        delete _deck[_card.type + 's'].cards[_card.name];
+
+        let i = 0;
+        Object.keys(_deck[_card.type + 's'].cards).map((_cardName) => { _deck[_card.type + 's'].cards[_cardName].id = i; i++; });
+        props.updateDeckData([_card.type + 's'], { ..._deck[_card.type + 's'] });
+    }
 
     function SubmitCreatedCard() {
         if (_deck[createCard.type + 's'].cards.hasOwnProperty(createCard.name)) {
@@ -30,28 +51,6 @@ function Deck(props) {
             props.updateDeckData([_typeName], { ..._deck[_typeName], cards: { ..._deck[_typeName].cards, [createCard.name]: createCard } });
             ClearCreateCardInputFields();
         }
-    }
-
-    function DeleteExistingCard(_card) {
-        delete _deck[_card.type + 's'].cards[_card.name];
-
-        let i = 0;
-        Object.keys(_deck[_card.type + 's'].cards).map((_cardName) => { _deck[_card.type + 's'].cards[_cardName].id = i; i++; });
-        props.updateDeckData([_card.type + 's'], { ..._deck[_card.type + 's'] });
-    }
-
-    function ClearCreateCardInputFields() {
-        document.getElementById('create-card-form').reset();
-
-        setCreateCard(
-            {
-                ...createCard,
-                name: "",
-                effect: "",
-                isAce: false,
-                customImgURL: null
-            }
-        );
     }
 
     return (

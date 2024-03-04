@@ -31,7 +31,7 @@ function DisplayCard(props) {
             <div className="trading-card-image-field ratio ratio-16x9 mx-auto mb-2">
                 <div style={
                     {
-                        backgroundImage: `url(${_card.customImgURL ? URL.createObjectURL(_card.customImgURL) : `images/${(_card.type === "warrior" || _card.type === "item") ? _card.strength.toLowerCase() + "-" : ""}${_card.type}.png`})`,
+                        backgroundImage: `url(${_card.customImg ? URL.createObjectURL(_card.customImg) : `images/${(_card.type === "warrior" || _card.type === "item") ? _card.strength.toLowerCase() + "-" : ""}${_card.type}.png`})`,
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "contain",
