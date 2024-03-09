@@ -15,6 +15,8 @@ function CreateCardForm(props) {
             _temp.strength = "";
         } else if (attribute === "type" && val !== "invocation" && _temp.strength === "") {
             _temp.strength = prevStrength;
+        } else if ( attribute === "customImg") {
+            
         }
 
         _temp[attribute] = val;

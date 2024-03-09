@@ -37,6 +37,12 @@ body {
   }
 }
 
+.bottom-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
 .card-strength-field {
   font-family: 'Urbanist-Bold';
 }
@@ -66,6 +72,10 @@ body {
   border-style: dashed;
 }
 
+.tab-body-container{
+  min-height: 87.5vh;
+}
+
 .trading-card-effect-field {
   line-height: 1.1;
   height: 41.75%;
@@ -82,6 +92,10 @@ body {
 .trading-card-name-field {
   font-family: 'Urbanist-Bold';
   height: 2rem;
+}
+
+.z-background-images {
+  z-index: -1;
 }
 
 .trading-card,
@@ -146,17 +160,3 @@ select:focus {
   font-family: "Urbanist-Black";
   src: url('./fonts/static/Urbanist-Black.ttf');
 }
-
-/*footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 2.5rem;            /* Footer height */
-/*
-  
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #f8f9fa;
-  background-color: #343a40;
-}*/

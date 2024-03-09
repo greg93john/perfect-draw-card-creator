@@ -69,35 +69,28 @@ function Exports(props) {
 
         const doc = new jsPDF("p", "px", "a4");
 
-        html2canvas(htmlContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidthFront + 1, height: htmlHeight + 1 }).then((canvas) => {
-            const pdfPageWidth = doc.internal.pageSize.getWidth(), pdfPageHeight = doc.internal.pageSize.getHeight();
-            const imgResizeRatioWidth = 1.20918984280532, imgResizeRatioHeight = 0.5988023952095808;
-            const imgWidth = pdfPageWidth * imgResizeRatioWidth, imgHeight = pdfPageHeight * imgResizeRatioHeight;
-            const htmlImgOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), htmlImgOffsetY = (pdfPageHeight / 2) - (imgWidth * 1.20);
+        const pdfPageWidth = doc.internal.pageSize.getWidth(), pdfPageHeight = doc.internal.pageSize.getHeight();
+        const imgResizeRatioWidth = 1.20918984280532, imgResizeRatioHeight = 0.5988023952095808;
+        const imgWidth = pdfPageWidth * imgResizeRatioWidth, imgHeight = pdfPageHeight * imgResizeRatioHeight;
+        const pdfOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), pdfOffsetY = (pdfPageHeight / 2) - (imgWidth * 1.175);
 
-            doc.addImage({ imageData: canvas.toDataURL("image/png"), format: 'PNG', x: htmlImgOffsetX, y: htmlImgOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
+        html2canvas(htmlContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidthFront + 1, height: htmlHeight + 1 }).then((canvas) => {
+            doc.addImage({ imageData: canvas.toDataURL("image/png"), format: 'PNG', x: pdfOffsetX, y: pdfOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
         });
         html2canvas(backCoverContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidthBack + 1, height: htmlHeight + 1 }).then((canvas) => {
             doc.addPage({ format: 'a4', orientation: 'p' });
-
-            const pdfPageWidth = doc.internal.pageSize.getWidth(), pdfPageHeight = doc.internal.pageSize.getHeight();
-            const imgResizeRatioWidth = 1.20918984280532, imgResizeRatioHeight = 0.5988023952095808;
-            const imgWidth = pdfPageWidth * imgResizeRatioWidth, imgHeight = pdfPageHeight * imgResizeRatioHeight;
-            const htmlImgOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), htmlImgOffsetY = (pdfPageHeight / 2) - (imgWidth * 1.20);
-
-            doc.addImage({ imageData: canvas.toDataURL("image/png"), format: 'PNG', x: htmlImgOffsetX, y: htmlImgOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
-
+            doc.addImage({ imageData: canvas.toDataURL("image/png"), format: 'PNG', x: pdfOffsetX, y: pdfOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
             doc.save("document.pdf");
         });
 
         htmlContainerToPDF.remove();
         backCoverContainerToPDF.remove();
     }
-    
-    return (
-        <div className="">
 
-            <div className="row row-cols-auto g-1 mx-0 my-3">
+    return (
+        <div className="pb-5">
+
+            <div className="row gy-5 mx-0 my-2">
                 {
                     Object.keys(_deck).map(
                         (_types) => {
@@ -106,7 +99,7 @@ function Exports(props) {
                                     (_cardName) => {
                                         const _cardObject = { ..._deck[_types].cards[_cardName], name: _cardName, type: _types.slice(0, -1) };
                                         return (
-                                            <div key={_cardName} className="col px-auto">
+                                            <div key={_cardName} className="col d-flex justify-content-center mt-3">
                                                 <DisplayCard cardObject={_cardObject} />
                                             </div>
                                         )
@@ -120,7 +113,7 @@ function Exports(props) {
 
             <button
                 disabled={Object.keys(_deck.warriors.cards).length + Object.keys(_deck.items.cards).length + Object.keys(_deck.invocations.cards).length === 0}
-                className='btn btn-danger w-100'
+                className='btn btn-danger bottom-button w-100'
                 onClick={() => GeneratePDF()}>Export to PDF
             </button>
             <div id='hidden-container'>

@@ -59,7 +59,7 @@ function Deck(props) {
                 <h2>Create New Card:</h2>
                 <hr />
 
-                <div className="row row-cols-2 mx-0 mb-3">
+                <div className="row row-cols-auto row-cols-lg-2 mx-0 mb-3">
                     <div className='col'>
                         <CreateCardForm createCard={createCard} submitCreatedCard={SubmitCreatedCard} setCreateCard={setCreateCard} />
                     </div>

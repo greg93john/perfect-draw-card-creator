@@ -9,7 +9,7 @@ function NavBar(props) {
                 </li>
 
                 <li className="nav-item" role="presentation" key={"exports"}>
-                    <button key={"exports-button"} className={"nav-link text-light" + ((props.activeTabName.toLowerCase() === "exports") ? " active" : "")} onClick={() => props.buttonFunction("Exports")} id="contact-tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">
+                    <button key={"exports-button"} className={"nav-link text-light" + ((props.activeTabName.toLowerCase() === "exports") ? " active" : "" + props.numOfCards <= 0 ? " disabled" : "")} onClick={() => props.buttonFunction("Exports")} id="contact-tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">
                         Exports
                     </button>
                 </li>

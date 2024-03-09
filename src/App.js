@@ -41,7 +41,7 @@ function App() {
 
   function ExportDeckData() {
     let _deckData = deckData;
-    
+
     // Convert object to JSON string
     const jsonData = JSON.stringify(_deckData, null, "\t"); // The second argument (null) is for replacer function, and the third argument ("\t") is for indentation
 
@@ -65,6 +65,11 @@ function App() {
     document.body.removeChild(downloadLink);
   }
 
+  function GetNumberOfCards() {
+    const num = Object.keys(deckData.warriors.cards).length + Object.keys(deckData.items.cards).length + Object.keys(deckData.invocations.cards).length;
+    return num;
+  }
+
   function ImportDeckData(importVal) {
 
   }
@@ -75,7 +80,7 @@ function App() {
 
   return (
     <div className="page-container">
-      <NavBar activeTabName={tabName} buttonFunction={ChangeTabTo} saveDeckData={ExportDeckData} />
+      <NavBar activeTabName={tabName} buttonFunction={ChangeTabTo} numOfCards={GetNumberOfCards()} saveDeckData={ExportDeckData} />
       <MainView deckData={deckData} updateDeckData={UpdateDeckData} tabName={tabName} />
       <Footer />
     </div>
