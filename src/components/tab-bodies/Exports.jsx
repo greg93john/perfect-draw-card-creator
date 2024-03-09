@@ -7,7 +7,7 @@ function Exports(props) {
     const _deck = props.deck;
 
     function GeneratePDF() {
-        let numOfCards = 0;
+        let numOfCards = 0, frontCardImgURLS = [];
 
         /* Generate Created Trading Cards (Front) HTML Collection */
         const htmlContainerToPDF = document.createElement('div');
@@ -20,6 +20,7 @@ function Exports(props) {
                 const _cards = _deck[_cardTypes].cards;
                 return (
                     Object.keys(_cards).map((_cardName) => {
+                        frontCardImgURLS = [...frontCardImgURLS, _deck[_cardTypes].cards[_cardName].pdfExportImgUrl];
                         return (
                             <div key={_cardName} id={`pdf-cutout-${numOfCards++}`} className="pdf-cutout-border">
 
@@ -30,11 +31,13 @@ function Exports(props) {
             })
         );
 
-        const cardElements = document.getElementsByClassName('trading-card');
-
         for (let x = 0; x < numOfCards; x++) {
-            const card = cardElements[x].cloneNode(true);
-            htmlContainerToPDF.querySelector(`#pdf-cutout-${x}`).appendChild(card);
+            const cardFrontElement = document.createElement('div');
+            document.body.appendChild(cardFrontElement);
+            cardFrontElement.classList.add('card-front');
+            cardFrontElement.style.backgroundImage = `url(${frontCardImgURLS[x]})`;
+            htmlContainerToPDF.querySelector(`#pdf-cutout-${x}`).appendChild(cardFrontElement.cloneNode(true));
+            cardFrontElement.remove();
         }
         /* End of Generating Created Trading Cards (Front) HTML Collection */
 
@@ -56,13 +59,13 @@ function Exports(props) {
                 )
             })
         );
-        const hiddenCardBack = document.createElement('div');
-        hiddenCardBack.classList.add('card-back');
-        document.body.appendChild(hiddenCardBack);
+        const cardBackElement = document.createElement('div');
+        cardBackElement.classList.add('card-back');
+        document.body.appendChild(cardBackElement);
         for (let y = 0; y < numOfBackCards; y++) {
-            backCoverContainerToPDF.querySelector(`#pdf-cutout-${y}`).appendChild(hiddenCardBack.cloneNode(true));
+            backCoverContainerToPDF.querySelector(`#pdf-cutout-${y}`).appendChild(cardBackElement.cloneNode(true));
         }
-        hiddenCardBack.remove();
+        cardBackElement.remove();
         /* End of Card Back Cover HTML Collection */
 
         const htmlWidthFront = htmlContainerToPDF.offsetWidth;
@@ -75,13 +78,18 @@ function Exports(props) {
         const imgWidth = pdfPageWidth * imgResizeRatioWidth, imgHeight = pdfPageHeight * imgResizeRatioHeight;
         const pdfOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), pdfOffsetY = (pdfPageHeight / 2) - (imgWidth * 1.175);
 
-        html2canvas(htmlContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidthFront + 1, height: htmlHeight + 1 }).then((canvas) => {
-            doc.addImage({ imageData: canvas.toDataURL("image/png"), format: 'PNG', x: pdfOffsetX, y: pdfOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
-        });
-        html2canvas(backCoverContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidthBack + 1, height: htmlHeight + 1 }).then((canvas) => {
-            doc.addPage({ format: 'a4', orientation: 'p' });
-            doc.addImage({ imageData: canvas.toDataURL("image/png"), format: 'PNG', x: pdfOffsetX, y: pdfOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
-            doc.save("document.pdf");
+        html2canvas(htmlContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidthFront + 1, height: htmlHeight + 1 }).then((canvasP1) => {
+            doc.addImage({ imageData: canvasP1.toDataURL("image/png"), format: 'PNG', x: pdfOffsetX, y: pdfOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
+
+            document.body.appendChild(backCoverContainerToPDF);
+
+            html2canvas(backCoverContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidthBack + 1, height: htmlHeight + 1 }).then((canvasP2) => {
+                doc.addPage({ format: 'a4', orientation: 'p' });
+                doc.addImage({ imageData: canvasP2.toDataURL("image/png"), format: 'PNG', x: pdfOffsetX, y: pdfOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
+                doc.save("document.pdf");
+            });
+            
+            backCoverContainerToPDF.remove();
         });
 
         htmlContainerToPDF.remove();

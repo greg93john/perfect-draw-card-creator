@@ -48,11 +48,7 @@ body {
 }
 
 .card-back {
-  width: 20.313rem;
-  height: 28.718rem;
   background-image: url('./images/back-card-image.png');
-  background-size: cover;
-  border: 0.625rem solid;
 }
 
 .content-wrap {
@@ -72,7 +68,7 @@ body {
   border-style: dashed;
 }
 
-.tab-body-container{
+.tab-body-container {
   min-height: 87.5vh;
 }
 
@@ -96,6 +92,14 @@ body {
 
 .z-background-images {
   z-index: -1;
+}
+
+.card-back,
+.card-front {
+  width: 20.313rem;
+  height: 28.718rem;
+  background-size: cover;
+  border: 0.625rem solid;
 }
 
 .trading-card,

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import DisplayCard from '../tab-elements/DisplayCard';
 import DisplayTypeCategory from '../tab-elements/DisplayTypeCategory';
 import CreateCardForm from '../tab-elements/CreateCardForm';
+import html2canvas from 'html2canvas';
 
 
 function Deck(props) {
@@ -48,8 +49,20 @@ function Deck(props) {
         } else {
             const _typeName = createCard.type + "s";
             createCard.id = Object.keys(_deck[_typeName].cards).length;
-            props.updateDeckData([_typeName], { ..._deck[_typeName], cards: { ..._deck[_typeName].cards, [createCard.name]: createCard } });
-            ClearCreateCardInputFields();
+
+            const createCardHTML = document.getElementsByClassName('create-trading-card')[0];
+            html2canvas(createCardHTML, { allowTaint: true, useCORS: true, width: createCardHTML.offsetWidth, height: createCardHTML.offsetHeight }).then((canvas) => {
+                canvas.toBlob((blob) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = () => {
+                        createCard.pdfExportImgUrl = reader.result;
+                    };
+                }, 'image/png', 1);
+
+                props.updateDeckData([_typeName], { ..._deck[_typeName], cards: { ..._deck[_typeName].cards, [createCard.name]: createCard } });
+                ClearCreateCardInputFields();
+            });
         }
     }
 
