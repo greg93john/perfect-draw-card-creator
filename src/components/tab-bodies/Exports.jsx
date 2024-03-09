@@ -56,8 +56,9 @@ function Exports(props) {
                 )
             })
         );
-        const hiddenCardBack = document.getElementById('hidden-container').querySelector('#hidden-card-back').cloneNode(true);
-        hiddenCardBack.classList.remove('d-none');
+        const hiddenCardBack = document.createElement('div');
+        hiddenCardBack.classList.add('card-back');
+        document.body.appendChild(hiddenCardBack);
         for (let y = 0; y < numOfBackCards; y++) {
             backCoverContainerToPDF.querySelector(`#pdf-cutout-${y}`).appendChild(hiddenCardBack.cloneNode(true));
         }
@@ -116,9 +117,6 @@ function Exports(props) {
                 className='btn btn-danger bottom-button w-100'
                 onClick={() => GeneratePDF()}>Export to PDF
             </button>
-            <div id='hidden-container'>
-                <div id='hidden-card-back' className='card-back d-none'></div>
-            </div>
         </div>
     )
 }
