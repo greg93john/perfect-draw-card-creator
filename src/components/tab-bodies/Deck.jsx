@@ -49,20 +49,8 @@ function Deck(props) {
         } else {
             const _typeName = createCard.type + "s";
             createCard.id = Object.keys(_deck[_typeName].cards).length;
-
-            const createCardHTML = document.getElementsByClassName('create-trading-card')[0];
-            html2canvas(createCardHTML, { allowTaint: true, useCORS: true, width: createCardHTML.offsetWidth, height: createCardHTML.offsetHeight }).then((canvas) => {
-                canvas.toBlob((blob) => {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(blob);
-                    reader.onloadend = () => {
-                        createCard.pdfExportImgUrl = reader.result;
-                    };
-                }, 'image/png', 1);
-
-                props.updateDeckData([_typeName], { ..._deck[_typeName], cards: { ..._deck[_typeName].cards, [createCard.name]: createCard } });
-                ClearCreateCardInputFields();
-            });
+            props.updateDeckData([_typeName], { ..._deck[_typeName], cards: { ..._deck[_typeName].cards, [createCard.name]: createCard } });
+            ClearCreateCardInputFields();
         }
     }
 
