@@ -42,6 +42,16 @@ function App() {
   function ExportDeckData() {
     let _deckData = deckData;
 
+    const disableSaveButton = (val) => {
+      let saveDataButton = document.getElementById('save-data-button');
+      if (saveDataButton) {
+        saveDataButton.innerHTML = val ? "Saving..." : "Save Data"
+        saveDataButton.disabled = val;
+      }
+    }
+
+    disableSaveButton(true);
+
     // Convert object to JSON string
     const jsonData = JSON.stringify(_deckData, null, "\t"); // The second argument (null) is for replacer function, and the third argument ("\t") is for indentation
 
@@ -56,6 +66,8 @@ function App() {
     downloadLink.click();
 
     document.body.removeChild(downloadLink);
+
+    disableSaveButton(false);
   }
 
   function GetNumberOfCards() {
@@ -65,6 +77,15 @@ function App() {
 
   function ImportDeckData(importVal) {
     const reader = new FileReader();
+    const disableImportDataButton = (val) => {
+      let importDataButton = document.getElementById('import-data-button');
+      if (importDataButton) {
+        importDataButton.innerHTML = val ? "Importing Data..." : "Import Data"
+        importDataButton.disabled = val;
+      }
+    }
+
+    disableImportDataButton(true);
 
     reader.addEventListener('load', (event) => {
       const importedData = JSON.parse(event.target.result);
@@ -81,20 +102,24 @@ function App() {
         originalKeys.map((_type) => {
           if (deckData[_type].id !== importedData[_type].id || !importedData[_type].hasOwnProperty('cards')) {
             isCompatible = false;
+          } else {
+            const _importedCards = Object.keys(importedData[_type].cards);
+            totalNumOfCards += _importedCards.length;
           }
-          const _importedCards = Object.keys(importedData[_type].cards);
-          totalNumOfCards += _importedCards.length;
         });
+
         if (totalNumOfCards < 0 || totalNumOfCards > 8) {
           isCompatible = false;
         }
       }
+
 
       if (isCompatible) {
         setDeckData(importedData);
       } else {
         alert('imported file type is not compatible!');
       }
+      disableImportDataButton(false);
     });
 
     reader.readAsText(importVal);

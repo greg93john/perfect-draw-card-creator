@@ -8,6 +8,15 @@ function Data(props) {
 
     function GeneratePDF() {
         let numOfCards = 0;
+        const disableExportButton = (val) => {
+            let pdfExportButton = document.getElementById('export-pdf-button');
+            if (pdfExportButton) {
+                pdfExportButton.innerHTML = val ? "Exporting PDF..." : "Export to PDF"
+                pdfExportButton.disabled = val;
+            }
+        }
+
+        disableExportButton(true);
 
         /* Generate Created Trading Cards (Front) HTML Collection */
         const htmlContainerToPDF = document.createElement('div');
@@ -76,6 +85,8 @@ function Data(props) {
         const pdfOffsetX = (pdfPageWidth / 2) - (imgHeight / 2), pdfOffsetY = (pdfPageHeight / 2) - (imgWidth * 1.175);
 
         html2canvas(htmlContainerToPDF, { allowTaint: true, useCORS: true, width: htmlWidthFront + 1, height: htmlHeight + 1 }).then((canvas) => {
+            disableExportButton(true);
+
             doc.addImage({ imageData: canvas.toDataURL("image/png"), format: 'PNG', x: pdfOffsetX, y: pdfOffsetY, width: imgWidth, height: imgHeight, rotation: 270 });
 
             document.body.appendChild(backCoverContainerToPDF);
@@ -87,6 +98,7 @@ function Data(props) {
             });
 
             backCoverContainerToPDF.remove();
+            disableExportButton(false);
         });
 
         htmlContainerToPDF.remove();
@@ -120,6 +132,7 @@ function Data(props) {
             <div className="row gx-1 mx-0 w-100 bottom-container">
                 <div className="col">
                     <button
+                        id='save-data-button'
                         disabled={Object.keys(_deck.warriors.cards).length + Object.keys(_deck.items.cards).length + Object.keys(_deck.invocations.cards).length === 0}
                         className='btn btn-primary w-100'
                         onClick={() => props.saveDeckData()}>Save Data
@@ -127,6 +140,7 @@ function Data(props) {
                 </div>
                 <div className="col">
                     <button
+                        id='import-data-button'
                         className='btn btn-warning w-100'
                         onClick={() => {
                             const fileInput = document.createElement('input');
@@ -140,6 +154,7 @@ function Data(props) {
                 </div>
                 <div className="col">
                     <button
+                        id='export-pdf-button'
                         disabled={Object.keys(_deck.warriors.cards).length + Object.keys(_deck.items.cards).length + Object.keys(_deck.invocations.cards).length === 0}
                         className='btn btn-danger w-100'
                         onClick={() => GeneratePDF()}>Export to PDF
