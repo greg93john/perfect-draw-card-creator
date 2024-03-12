@@ -8,7 +8,7 @@ function NavBar(props) {
                     </button>
                 </li>
 
-                <li className="nav-item" role="presentation" key={"exports"}>
+                <li className="nav-item" role="presentation" key={"data"}>
                     <button key={"data-button"} className={"nav-link text-light" + ((props.activeTabName.toLowerCase() === "data") ? " active" : "")} onClick={() => props.buttonFunction("Data")} id="contact-tab" data-bs-toggle="tab" type="button" role="tab" aria-selected="true">
                         Data
                     </button>
