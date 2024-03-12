@@ -64,16 +64,40 @@ function App() {
   }
 
   function ImportDeckData(importVal) {
-    const file = importVal;
     const reader = new FileReader();
 
     reader.addEventListener('load', (event) => {
-      const importedObject = JSON.parse(event.target.result);
+      const importedData = JSON.parse(event.target.result);
+      let isCompatible = true;
 
-      setDeckData(importedObject);
+
+      const originalKeys = Object.keys(deckData);
+      const importKeys = Object.keys(importedData);
+
+      if (originalKeys.length !== importKeys.length) {
+        isCompatible = false;
+      } else {
+        let totalNumOfCards = 0;
+        originalKeys.map((_type) => {
+          if (deckData[_type].id !== importedData[_type].id || !importedData[_type].hasOwnProperty('cards')) {
+            isCompatible = false;
+          }
+          const _importedCards = Object.keys(importedData[_type].cards);
+          totalNumOfCards += _importedCards.length;
+        });
+        if (totalNumOfCards < 0 || totalNumOfCards > 8) {
+          isCompatible = false;
+        }
+      }
+
+      if (isCompatible) {
+        setDeckData(importedData);
+      } else {
+        alert('imported file type is not compatible!');
+      }
     });
 
-    reader.readAsText(file);
+    reader.readAsText(importVal);
   }
 
   function UpdateDeckData(key, val) {

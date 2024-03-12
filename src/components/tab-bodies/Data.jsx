@@ -122,7 +122,7 @@ function Data(props) {
                     <button
                         disabled={Object.keys(_deck.warriors.cards).length + Object.keys(_deck.items.cards).length + Object.keys(_deck.invocations.cards).length === 0}
                         className='btn btn-primary w-100'
-                        onClick={() => props.saveDeckData()}>Save
+                        onClick={() => props.saveDeckData()}>Save Data
                     </button>
                 </div>
                 <div className="col">
