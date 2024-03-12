@@ -3,7 +3,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import DisplayCard from "../tab-elements/DisplayCard";
 
-function Exports(props) {
+function Data(props) {
     const _deck = props.deck;
 
     function GeneratePDF() {
@@ -117,13 +117,37 @@ function Exports(props) {
                 }
             </div>
 
-            <button
-                disabled={Object.keys(_deck.warriors.cards).length + Object.keys(_deck.items.cards).length + Object.keys(_deck.invocations.cards).length === 0}
-                className='btn btn-danger bottom-button w-100'
-                onClick={() => GeneratePDF()}>Export to PDF
-            </button>
+            <div className="row gx-1 mx-0 w-100 bottom-container">
+                <div className="col">
+                    <button
+                        disabled={Object.keys(_deck.warriors.cards).length + Object.keys(_deck.items.cards).length + Object.keys(_deck.invocations.cards).length === 0}
+                        className='btn btn-primary w-100'
+                        onClick={() => props.saveDeckData()}>Save
+                    </button>
+                </div>
+                <div className="col">
+                    <button
+                        className='btn btn-warning w-100'
+                        onClick={() => {
+                            const fileInput = document.createElement('input');
+                            fileInput.type = 'file';
+                            fileInput.addEventListener('change', (e) => {
+                                props.importDeckData(e.target.files[0]);
+                            });
+                            fileInput.click();
+                        }}>Import Data
+                    </button>
+                </div>
+                <div className="col">
+                    <button
+                        disabled={Object.keys(_deck.warriors.cards).length + Object.keys(_deck.items.cards).length + Object.keys(_deck.invocations.cards).length === 0}
+                        className='btn btn-danger w-100'
+                        onClick={() => GeneratePDF()}>Export to PDF
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }
 
-export default Exports;
+export default Data;

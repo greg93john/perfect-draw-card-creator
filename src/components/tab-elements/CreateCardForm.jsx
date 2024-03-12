@@ -8,22 +8,32 @@ function CreateCardForm(props) {
     }
 
     function UpdateCreateCardValue(attribute, val) {
-        let _temp = props.createCard;
-
-        if (attribute === "type" && val === "invocation") {
-            setPrevStrength(_temp.strength);
-            _temp.strength = "";
-        } else if (attribute === "type" && val !== "invocation" && _temp.strength === "") {
-            _temp.strength = prevStrength;
-        } else if ( attribute === "customImg") {
-            
+        if (attribute === "customImg") {
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                let _temp = props.createCard;
+                _temp[attribute] = reader.result;
+                props.setCreateCard(
+                    { ..._temp }
+                );
+            });
+            reader.readAsDataURL(val);
         }
 
-        _temp[attribute] = val;
+        else {
+            let _temp = props.createCard;
+            if (attribute === "type" && val === "invocation") {
+                setPrevStrength(_temp.strength);
+                _temp.strength = "";
+            } else if (attribute === "type" && val !== "invocation" && _temp.strength === "") {
+                _temp.strength = prevStrength;
+            }
+            _temp[attribute] = val;
 
-        props.setCreateCard(
-            { ..._temp }
-        );
+            props.setCreateCard(
+                { ..._temp }
+            );
+        }
 
     }
 
@@ -70,7 +80,7 @@ function CreateCardForm(props) {
 
             Upload Image (16:9 aspect ratio)
             <br />
-            <input id="upload-image-input" type="file" onChange={(e) => UpdateCreateCardValue("customImg", e.target.files[0])} />
+            <input id="upload-image-input" type="file" onChange={(e) => { UpdateCreateCardValue("customImg", e.target.files[0]) }} />
 
             <br />
 

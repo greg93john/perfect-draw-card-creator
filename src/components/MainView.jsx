@@ -1,5 +1,5 @@
 import Deck from './tab-bodies/Deck';
-import Exports from './tab-bodies/Exports';
+import Data from './tab-bodies/Data';
 
 function MainView(props) {
 
@@ -9,7 +9,7 @@ function MainView(props) {
 
       case "deck": return (<Deck deckData={props.deckData} updateDeckData={props.updateDeckData} />);
 
-      case "exports": return (<Exports deck={props.deckData} />);
+      case "data": return (<Data deck={props.deckData} importDeckData={props.importDeckData} saveDeckData={props.saveDeckData} />);
 
       default: return (<div></div>);
     }

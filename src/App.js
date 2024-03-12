@@ -50,18 +50,11 @@ function App() {
 
     // Create a link element
     const downloadLink = document.createElement('a');
-
-    // Set the href attribute of the link to the Blob object
     downloadLink.href = URL.createObjectURL(blob);
-
-    // Set the download attribute and file name with custom extension
     downloadLink.download = 'save.perf';
-
-    // Append the link to the document body and trigger the click event
     document.body.appendChild(downloadLink);
     downloadLink.click();
 
-    // Remove the link from the document body
     document.body.removeChild(downloadLink);
   }
 
@@ -71,7 +64,16 @@ function App() {
   }
 
   function ImportDeckData(importVal) {
+    const file = importVal;
+    const reader = new FileReader();
 
+    reader.addEventListener('load', (event) => {
+      const importedObject = JSON.parse(event.target.result);
+
+      setDeckData(importedObject);
+    });
+
+    reader.readAsText(file);
   }
 
   function UpdateDeckData(key, val) {
@@ -80,8 +82,8 @@ function App() {
 
   return (
     <div className="page-container">
-      <NavBar activeTabName={tabName} buttonFunction={ChangeTabTo} numOfCards={GetNumberOfCards()} saveDeckData={ExportDeckData} />
-      <MainView deckData={deckData} updateDeckData={UpdateDeckData} tabName={tabName} />
+      <NavBar activeTabName={tabName} buttonFunction={ChangeTabTo} numOfCards={GetNumberOfCards()} />
+      <MainView deckData={deckData} updateDeckData={UpdateDeckData} tabName={tabName} importDeckData={ImportDeckData} saveDeckData={ExportDeckData} />
       <Footer />
     </div>
   );
