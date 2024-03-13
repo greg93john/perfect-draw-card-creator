@@ -77,6 +77,7 @@ function App() {
 
   function ImportDeckData(importVal) {
     const reader = new FileReader();
+
     const disableImportDataButton = (val) => {
       let importDataButton = document.getElementById('import-data-button');
       if (importDataButton) {
@@ -99,6 +100,7 @@ function App() {
         isCompatible = false;
       } else {
         let totalNumOfCards = 0;
+        
         originalKeys.map((_type) => {
           if (deckData[_type].id !== importedData[_type].id || !importedData[_type].hasOwnProperty('cards')) {
             isCompatible = false;
@@ -123,7 +125,7 @@ function App() {
           if (dataURI.split(',')[0].indexOf('base64') >= 0)
             byteString = atob(dataURI.split(',')[1]);
           else
-            byteString = unescape(dataURI.split(',')[1]);
+            byteString = decodeURI(dataURI.split(',')[1]);
 
           // separate out the mime component
           const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
