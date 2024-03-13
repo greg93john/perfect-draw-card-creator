@@ -115,6 +115,53 @@ function App() {
 
 
       if (isCompatible) {
+        let _warriorCards = importedData.warriors.cards, _itemCards = importedData.items.cards, _invocationCards = importedData.invocations.cards;
+
+        const dataURItoBlob = (dataURI) => {
+          // convert base64/URLEncoded data component to raw binary data held in a string
+          let byteString;
+          if (dataURI.split(',')[0].indexOf('base64') >= 0)
+            byteString = atob(dataURI.split(',')[1]);
+          else
+            byteString = unescape(dataURI.split(',')[1]);
+
+          // separate out the mime component
+          const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+          // write the bytes of the string to a typed array
+          const ia = new Uint8Array(byteString.length);
+
+          for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+          }
+
+          return new Blob([ia], { type: mimeString });
+        }
+
+        Object.keys(_warriorCards).map((_cardName) => {
+          if (_warriorCards[_cardName].customImg) {
+            _warriorCards[_cardName].customImgBlob = dataURItoBlob(_warriorCards[_cardName].customImg);
+            _warriorCards[_cardName].customImgURL = URL.createObjectURL(_warriorCards[_cardName].customImgBlob);
+          }
+        });
+        importedData.warriors.cards = _warriorCards;
+
+        Object.keys(_itemCards).map((_cardName) => {
+          if (_itemCards[_cardName].customImg) {
+            _itemCards[_cardName].customImgBlob = dataURItoBlob(_itemCards[_cardName].customImg);
+            _itemCards[_cardName].customImgURL = URL.createObjectURL(_itemCards[_cardName].customImgBlob);
+          }
+        });
+        importedData.items.cards = _itemCards;
+
+        Object.keys(_invocationCards).map((_cardName) => {
+          if (_invocationCards[_cardName].customImg) {
+            _invocationCards[_cardName].customImgBlob = dataURItoBlob(_invocationCards[_cardName].customImg);
+            _invocationCards[_cardName].customImgURL = URL.createObjectURL(_invocationCards[_cardName].customImgBlob);
+          }
+        });
+        importedData.invocations.cards = _invocationCards;
+
         setDeckData(importedData);
       } else {
         alert('imported file type is not compatible!');
