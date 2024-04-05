@@ -147,6 +147,7 @@ function Data(props) {
                             fileInput.type = 'file';
                             fileInput.addEventListener('change', (e) => {
                                 props.importDeckData(e.target.files[0]);
+                                fileInput.remove();
                             });
                             fileInput.click();
                         }}>Import Data
