@@ -7,6 +7,10 @@ import NavBar from "./components/NavBar";
 function App() {
   const [tabName, setTabName] = useState("Deck");
 
+  function ChangeTabTo(varName) {
+    setTabName(varName);
+  }
+
   const [deckData, setDeckData] = useState(
     {
       warriors: {
@@ -34,9 +38,10 @@ function App() {
       }
     }
   );
-
-  function ChangeTabTo(varName) {
-    setTabName(varName);
+  
+  function GetNumberOfCards() {
+    const num = Object.keys(deckData.warriors.cards).length + Object.keys(deckData.items.cards).length + Object.keys(deckData.invocations.cards).length;
+    return num;
   }
 
   function ExportDeckData() {
@@ -70,10 +75,6 @@ function App() {
     disableSaveButton(false);
   }
 
-  function GetNumberOfCards() {
-    const num = Object.keys(deckData.warriors.cards).length + Object.keys(deckData.items.cards).length + Object.keys(deckData.invocations.cards).length;
-    return num;
-  }
 
   function ImportDeckData(importVal) {
     const reader = new FileReader();
@@ -117,7 +118,6 @@ function App() {
 
 
       if (isCompatible) {
-        let _warriorCards = importedData.warriors.cards, _itemCards = importedData.items.cards, _invocationCards = importedData.invocations.cards;
 
         const dataURItoBlob = (dataURI) => {
           // convert base64/URLEncoded data component to raw binary data held in a string
@@ -127,10 +127,7 @@ function App() {
           else
             byteString = decodeURI(dataURI.split(',')[1]);
 
-          // separate out the mime component
           const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-          // write the bytes of the string to a typed array
           const ia = new Uint8Array(byteString.length);
 
           for (let i = 0; i < byteString.length; i++) {
@@ -140,33 +137,23 @@ function App() {
           return new Blob([ia], { type: mimeString });
         }
 
-        Object.keys(_warriorCards).map((_cardName) => {
-          if (_warriorCards[_cardName].customImg) {
-            _warriorCards[_cardName].customImgBlob = dataURItoBlob(_warriorCards[_cardName].customImg);
-            _warriorCards[_cardName].customImgURL = URL.createObjectURL(_warriorCards[_cardName].customImgBlob);
-          }
-        });
-        importedData.warriors.cards = _warriorCards;
+        const unpackImportedCardImages = (_importedCards) => {
+          Object.keys(_importedCards).map((_cardName) => {
+            if(_importedCards[_cardName].customImg) {
+              _importedCards[_cardName].customImgBlob = dataURItoBlob(_importedCards[_cardName].customImg);
+              _importedCards[_cardName].customImgURL = URL.createObjectURL(_importedCards[_cardName].customImgBlob);
+            }
+          });
+          return _importedCards;
+        }
 
-        Object.keys(_itemCards).map((_cardName) => {
-          if (_itemCards[_cardName].customImg) {
-            _itemCards[_cardName].customImgBlob = dataURItoBlob(_itemCards[_cardName].customImg);
-            _itemCards[_cardName].customImgURL = URL.createObjectURL(_itemCards[_cardName].customImgBlob);
-          }
+        Object.keys(importedData).map((_cardType) => {
+          importedData[_cardType].cards = unpackImportedCardImages(importedData[_cardType].cards);
         });
-        importedData.items.cards = _itemCards;
-
-        Object.keys(_invocationCards).map((_cardName) => {
-          if (_invocationCards[_cardName].customImg) {
-            _invocationCards[_cardName].customImgBlob = dataURItoBlob(_invocationCards[_cardName].customImg);
-            _invocationCards[_cardName].customImgURL = URL.createObjectURL(_invocationCards[_cardName].customImgBlob);
-          }
-        });
-        importedData.invocations.cards = _invocationCards;
 
         setDeckData(importedData);
       } else {
-        alert('imported file type is not compatible!');
+        alert('imported file is not compatible!');
       }
       disableImportDataButton(false);
     });

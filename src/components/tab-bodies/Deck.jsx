@@ -2,7 +2,6 @@ import { useState } from 'react';
 import DisplayCard from '../tab-elements/DisplayCard';
 import DisplayTypeCategory from '../tab-elements/DisplayTypeCategory';
 import CreateCardForm from '../tab-elements/CreateCardForm';
-import html2canvas from 'html2canvas';
 
 
 function Deck(props) {
